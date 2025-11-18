@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { categories, subcategories } from '../data/categories';
 import Navbar from '../components/Navbar';
@@ -8,6 +9,11 @@ function CategoryPage() {
   const { slug } = useParams();
   const category = categories.find(cat => cat.slug === slug);
   const categorySubcategories = subcategories[slug] || [];
+
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   if (!category) {
     return (
