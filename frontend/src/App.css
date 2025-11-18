@@ -1,0 +1,10 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  overflow: visible;
+}
+
+* {
+  box-sizing: border-box;
+}

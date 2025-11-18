@@ -1,0 +1,331 @@
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { categories, subcategories } from '../data/categories';
+import './Navbar.css';
+
+function Navbar() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide navbar when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    // Close menu when clicking outside
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('.navbar-menu') && !event.target.closest('.navbar-menu-toggle')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Close menu on escape key
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    // Close search when clicking outside
+    const handleClickOutside = (event) => {
+      if (isSearchOpen && !event.target.closest('.navbar-search-modal') && !event.target.closest('.navbar-icon')) {
+        setIsSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+
+    // Close search on escape key
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+
+    // Focus search input when opened
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+
+    if (isSearchOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [isSearchOpen]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    if (isSearchOpen) {
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+    if (!isSearchOpen) {
+      setSearchQuery('');
+    }
+  };
+
+  const handleCategoryClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  const handleSearchResultClick = () => {
+    setIsSearchOpen(false);
+    setSearchQuery('');
+  };
+
+  // Search function
+  const getSearchResults = () => {
+    if (!searchQuery.trim()) {
+      return { categories: [], subcategories: [] };
+    }
+
+    const query = searchQuery.toLowerCase().trim();
+    const matchedCategories = categories.filter(cat => 
+      cat.name.toLowerCase().includes(query) ||
+      cat.subtitle.toLowerCase().includes(query) ||
+      cat.description.toLowerCase().includes(query)
+    );
+
+    const matchedSubcategories = [];
+    Object.entries(subcategories).forEach(([categorySlug, subs]) => {
+      subs.forEach(sub => {
+        if (sub.name.toLowerCase().includes(query)) {
+          const parentCategory = categories.find(cat => cat.slug === categorySlug);
+          matchedSubcategories.push({
+            ...sub,
+            parentCategory: parentCategory
+          });
+        }
+      });
+    });
+
+    return { categories: matchedCategories, subcategories: matchedSubcategories };
+  };
+
+  const searchResults = getSearchResults();
+
+  return (
+    <>
+      <nav className={`navbar ${!isVisible ? 'navbar-hidden' : ''}`}>
+        <div className="navbar-container">
+          <div className="navbar-left">
+            <Link to="/" className="navbar-logo cursor-target">
+              <img src="/TBONLogo.png" alt="TBPN Logo" className="navbar-logo-img" />
+            </Link>
+            <button 
+              className={`navbar-menu-toggle cursor-target ${isMenuOpen ? 'active' : ''}`}
+              onClick={toggleMenu}
+              aria-label="Menu"
+              aria-expanded={isMenuOpen}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {isMenuOpen ? (
+                  <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                ) : (
+                  <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                )}
+              </svg>
+            </button>
+          </div>
+          <div className="navbar-right">
+            <button 
+              className="navbar-icon cursor-target" 
+              aria-label="Search"
+              onClick={toggleSearch}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+                <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+            <button className="navbar-icon cursor-target" aria-label="Cart">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 2L6 9H3l3 11h12l3-11h-3l-3-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 2h6l3 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span className="navbar-cart-badge">0</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      
+      <div className={`navbar-menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={handleCategoryClick}>
+        <div className="navbar-menu" onClick={(e) => e.stopPropagation()}>
+          <div className="navbar-menu-header">
+            <h2 className="navbar-menu-title">Categories</h2>
+          </div>
+          <nav className="navbar-menu-nav">
+            {categories.map((category) => (
+              <Link
+                key={category.id}
+                to={`/category/${category.slug}`}
+                className="navbar-menu-item cursor-target"
+                onClick={handleCategoryClick}
+              >
+                <div className="navbar-menu-item-content">
+                  <span className="navbar-menu-item-name">{category.name}</span>
+                  <span className="navbar-menu-item-subtitle">{category.subtitle}</span>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* Search Modal */}
+      <div className={`navbar-search-overlay ${isSearchOpen ? 'active' : ''}`} onClick={handleSearchResultClick}>
+        <div className="navbar-search-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="navbar-search-header">
+            <div className="navbar-search-input-wrapper">
+              <svg className="navbar-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+                <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+              <input
+                ref={searchInputRef}
+                type="text"
+                className="navbar-search-input"
+                placeholder="Search categories and products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {searchQuery && (
+                <button 
+                  className="navbar-search-clear"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="navbar-search-results">
+            {searchQuery.trim() ? (
+              <>
+                {searchResults.categories.length === 0 && searchResults.subcategories.length === 0 ? (
+                  <div className="navbar-search-empty">
+                    <p>No results found for "{searchQuery}"</p>
+                  </div>
+                ) : (
+                  <>
+                    {searchResults.categories.length > 0 && (
+                      <div className="navbar-search-section">
+                        <h3 className="navbar-search-section-title">Categories</h3>
+                        {searchResults.categories.map((category) => (
+                          <Link
+                            key={category.id}
+                            to={`/category/${category.slug}`}
+                            className="navbar-search-result-item cursor-target"
+                            onClick={handleSearchResultClick}
+                          >
+                            <div className="navbar-search-result-content">
+                              <span className="navbar-search-result-name">{category.name}</span>
+                              <span className="navbar-search-result-subtitle">{category.subtitle}</span>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                    {searchResults.subcategories.length > 0 && (
+                      <div className="navbar-search-section">
+                        <h3 className="navbar-search-section-title">Products</h3>
+                        {searchResults.subcategories.map((subcategory, index) => (
+                          <a
+                            key={`${subcategory.slug}-${index}`}
+                            href={subcategory.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="navbar-search-result-item cursor-target"
+                            onClick={handleSearchResultClick}
+                          >
+                            <div className="navbar-search-result-content">
+                              <span className="navbar-search-result-name">{subcategory.name}</span>
+                              <span className="navbar-search-result-subtitle">
+                                {subcategory.parentCategory?.name || subcategory.parentCategory?.subtitle}
+                              </span>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <div className="navbar-search-empty">
+                <p>Start typing to search...</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Navbar;
+
