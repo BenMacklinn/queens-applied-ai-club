@@ -73,10 +73,16 @@
 
 .category-card-label {
   position: absolute;
-  right: 20px;
-  bottom: 30px;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
   z-index: 2;
-  transform: translateY(20%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  pointer-events: none;
 }
 
 .category-card-name {
@@ -95,6 +101,11 @@
   line-height: 1.2;
   transform: rotate(180deg) scaleY(0.6);
   transform-origin: center;
+  white-space: nowrap;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .category-card:hover .category-card-name {
@@ -126,6 +137,20 @@
   
 }
 
+@media (max-width: 1200px) {
+  .category-card-name {
+    font-size: 36px;
+    letter-spacing: 6px;
+  }
+}
+
+@media (max-width: 968px) {
+  .category-card-name {
+    font-size: 32px;
+    letter-spacing: 5px;
+  }
+}
+
 @media (max-width: 640px) {
   .category-card-wrapper {
     min-width: 140px;
@@ -136,9 +161,14 @@
     height: 500px;
   }
 
+  .category-card-label {
+    padding: 15px;
+  }
+
   .category-card-name {
     font-size: 24px;
-    padding: 12px 8px;
+    letter-spacing: 4px;
+    padding: 0;
   }
 }
 
