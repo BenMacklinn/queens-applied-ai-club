@@ -82,6 +82,8 @@
   position: relative;
   overflow: hidden;
   min-height: 100%;
+  /* Hide initially to prevent flash - GSAP will animate */
+  opacity: 0;
 }
 
 .subcategory-card::before {
