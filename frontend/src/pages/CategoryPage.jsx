@@ -22,7 +22,7 @@ function CategoryPage() {
         <div className="category-page">
           <div className="category-page-container">
             <h1>Category not found</h1>
-            <Link to="/" className="back-link">← Back to Home</Link>
+            <Link to="/" className="back-link cursor-target">← Back to Home</Link>
           </div>
         </div>
         <Footer />
@@ -35,7 +35,7 @@ function CategoryPage() {
       <Navbar />
       <div className="category-page">
         <div className="category-page-container">
-          <Link to="/" className="back-link">← Back to Home</Link>
+          <Link to="/" className="back-link cursor-target">← Back to Home</Link>
           <div className="category-header">
             <h1 className="category-title">{category.name}</h1>
           </div>

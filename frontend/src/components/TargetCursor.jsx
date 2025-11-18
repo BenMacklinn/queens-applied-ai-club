@@ -241,7 +241,18 @@ const TargetCursor = ({
       target.addEventListener('mouseleave', leaveHandler);
     };
 
+    const clickHandler = e => {
+      if (!activeTarget || !currentLeaveHandler) return;
+      
+      const clickedElement = e.target;
+      // Check if the clicked element is the active target or is inside it
+      if (activeTarget === clickedElement || activeTarget.contains(clickedElement)) {
+        currentLeaveHandler();
+      }
+    };
+
     window.addEventListener('mouseover', enterHandler, { passive: true });
+    window.addEventListener('click', clickHandler, { passive: true });
 
     return () => {
       if (tickerFnRef.current) {
@@ -249,6 +260,7 @@ const TargetCursor = ({
       }
       window.removeEventListener('mousemove', moveHandler);
       window.removeEventListener('mouseover', enterHandler);
+      window.removeEventListener('click', clickHandler);
       window.removeEventListener('scroll', scrollHandler);
       window.removeEventListener('mousedown', mouseDownHandler);
       window.removeEventListener('mouseup', mouseUpHandler);
