@@ -17,7 +17,7 @@ const CategoryCard = forwardRef(({ category, index }, ref) => {
         style={{ borderColor: borderColor, '--card-green': borderColor }} 
         data-index={index}
       >
-        <div className="category-card-image-container">
+        <div className="category-card-image-container" data-category-slug={category.slug}>
           <img 
             src={category.imageUrl} 
             alt={category.name}

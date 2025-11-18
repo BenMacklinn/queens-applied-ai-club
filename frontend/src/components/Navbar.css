@@ -136,8 +136,11 @@
 }
 
 .navbar-menu-header {
-  padding: 80px 32px 24px 32px;
+  padding: 120px 32px 40px 32px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  min-height: 120px;
 }
 
 .navbar-menu-title {
@@ -146,7 +149,10 @@
   color: #002C21;
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 8px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-menu-nav {
@@ -165,7 +171,7 @@
 }
 
 .navbar-menu-item:hover {
-  background-color: rgba(2, 152, 101, 0.05);
+  background-color: var(--hover-color);
 }
 
 .navbar-menu-item-content {
@@ -176,14 +182,18 @@
 
 .navbar-menu-item-name {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 900;
   color: #002C21;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 .navbar-menu-item-subtitle {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .navbar-menu-item svg {
@@ -218,6 +228,7 @@
 
   .navbar-menu-title {
     font-size: 28px;
+    letter-spacing: 6px;
   }
 
   .navbar-menu-item {
@@ -226,6 +237,12 @@
 
   .navbar-menu-item-name {
     font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .navbar-menu-item-subtitle {
+    font-size: 11px;
+    letter-spacing: 1.5px;
   }
 }
 
@@ -292,12 +309,23 @@
 .navbar-search-input {
   width: 100%;
   padding: 16px 16px 16px 48px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   border: 2px solid #002C21;
   border-radius: 0;
   outline: none;
   transition: border-color 0.3s ease;
   font-family: inherit;
+}
+
+.navbar-search-input::placeholder {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #666;
+  opacity: 0.7;
 }
 
 .navbar-search-input:focus {
@@ -334,11 +362,11 @@
 }
 
 .navbar-search-section-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #666;
+  font-size: 12px;
+  font-weight: 900;
+  color: #002C21;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
   padding: 0 24px 12px 24px;
   margin: 0;
 }
@@ -389,7 +417,10 @@
 }
 
 .navbar-search-empty p {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   color: #666;
   margin: 0;
 }

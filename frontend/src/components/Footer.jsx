@@ -11,18 +11,20 @@ function Footer() {
           </div>
           
           <div className="footer-links">
-            <a href="https://www.tbpnmerch.com/blog" className="footer-link cursor-target">Blog</a>
+            <span className="footer-categories-group">
+              {categories.map((category, index) => (
+                <span key={category.id}>
+                  <a href={`#${category.slug}`} className="footer-link footer-link-category cursor-target">
+                    {category.name}
+                  </a>
+                  {index < categories.length - 1 && <span className="footer-separator">•</span>}
+                </span>
+              ))}
+            </span>
             <span className="footer-separator">•</span>
-            {categories.map((category, index) => (
-              <span key={category.id}>
-                <a href={`#${category.slug}`} className="footer-link cursor-target">
-                  {category.name}
-                </a>
-                {index < categories.length - 1 && <span className="footer-separator">•</span>}
-              </span>
-            ))}
+            <a href="https://www.tbpnmerch.com/blog" className="footer-link footer-link-blog cursor-target">Blog</a>
             <span className="footer-separator">•</span>
-            <a href="#contact" className="footer-link cursor-target">Contact Us</a>
+            <a href="mailto:tbpnmerch@gmail.com" className="footer-link footer-link-contact cursor-target">Contact Us</a>
           </div>
         </div>
         

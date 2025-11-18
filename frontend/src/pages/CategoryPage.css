@@ -1,7 +1,7 @@
 .category-page {
   min-height: 100vh;
   background: white;
-  padding: 120px 0 80px 0;
+  padding: 120px 0 40px 0;
 }
 
 .category-page-container {
@@ -176,7 +176,7 @@
 
 @media (max-width: 768px) {
   .category-page {
-    padding: 100px 0 60px 0;
+    padding: 100px 0 30px 0;
   }
   
   .back-link {

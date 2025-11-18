@@ -44,10 +44,11 @@
   right: 0;
   bottom: 0;
   background: var(--card-green);
-  opacity: 0.85;
+  opacity: 0.95;
   mix-blend-mode: multiply;
   z-index: 1;
   transition: opacity 0.3s ease;
+  box-shadow: inset 0 0 100px rgba(0, 44, 33, 0.3);
 }
 
 .category-card:hover .category-card-image-container::before {
@@ -63,6 +64,11 @@
   filter: brightness(0.6);
   opacity: 0.9;
   transform: scale(0.95);
+}
+
+/* Essentials category - show more of the left side */
+.category-card-image-container[data-category-slug="accessories"] .category-card-image {
+  object-position: 30% center;
 }
 
 .category-card:hover .category-card-image {

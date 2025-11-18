@@ -8,8 +8,21 @@ function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => {
+    // Load search query from localStorage on mount
+    return localStorage.getItem('searchQuery') || '';
+  });
   const searchInputRef = useRef(null);
+
+  // Save search query to localStorage whenever it changes
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      localStorage.setItem('searchQuery', searchQuery);
+    } else {
+      // Only remove from localStorage if explicitly cleared, not on mount
+      // This allows the query to persist across page navigations
+    }
+  }, [searchQuery]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +77,7 @@ function Navbar() {
     const handleClickOutside = (event) => {
       if (isSearchOpen && !event.target.closest('.navbar-search-modal') && !event.target.closest('.navbar-icon')) {
         setIsSearchOpen(false);
-        setSearchQuery('');
+        // Don't clear search query - keep it for next time
       }
     };
 
@@ -72,7 +85,7 @@ function Navbar() {
     const handleEscape = (event) => {
       if (event.key === 'Escape' && isSearchOpen) {
         setIsSearchOpen(false);
-        setSearchQuery('');
+        // Don't clear search query - keep it for next time
       }
     };
 
@@ -100,7 +113,7 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
     if (isSearchOpen) {
       setIsSearchOpen(false);
-      setSearchQuery('');
+      // Don't clear search query - keep it for next time
     }
   };
 
@@ -109,8 +122,12 @@ function Navbar() {
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
+    // Don't clear search query when opening - restore from localStorage if needed
     if (!isSearchOpen) {
-      setSearchQuery('');
+      const savedQuery = localStorage.getItem('searchQuery') || '';
+      if (savedQuery) {
+        setSearchQuery(savedQuery);
+      }
     }
   };
 
@@ -118,9 +135,9 @@ function Navbar() {
     setIsMenuOpen(false);
   };
 
-  const handleSearchResultClick = () => {
+  const handleSearchOverlayClick = () => {
     setIsSearchOpen(false);
-    setSearchQuery('');
+    // Don't clear search query - keep it for next time
   };
 
   // Search function
@@ -205,12 +222,22 @@ function Navbar() {
             <h2 className="navbar-menu-title">Categories</h2>
           </div>
           <nav className="navbar-menu-nav">
-            {categories.map((category) => (
+            {categories.map((category, index) => {
+              const borderColors = ['#002C21', '#004D3B', '#006145', '#017956', '#029865'];
+              const hoverColor = borderColors[index % borderColors.length];
+              // Convert hex to rgba with higher opacity to show green colors
+              const hex = hoverColor.replace('#', '');
+              const r = parseInt(hex.substr(0, 2), 16);
+              const g = parseInt(hex.substr(2, 2), 16);
+              const b = parseInt(hex.substr(4, 2), 16);
+              const hoverColorRgba = `rgba(${r}, ${g}, ${b}, 0.35)`;
+              return (
               <Link
                 key={category.id}
                 to={`/category/${category.slug}`}
                 className="navbar-menu-item cursor-target"
                 onClick={handleCategoryClick}
+                style={{ '--hover-color': hoverColorRgba }}
               >
                 <div className="navbar-menu-item-content">
                   <span className="navbar-menu-item-name">{category.name}</span>
@@ -220,13 +247,14 @@ function Navbar() {
                   <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
-            ))}
+              );
+            })}
           </nav>
         </div>
       </div>
 
       {/* Search Modal */}
-      <div className={`navbar-search-overlay ${isSearchOpen ? 'active' : ''}`} onClick={handleSearchResultClick}>
+      <div className={`navbar-search-overlay ${isSearchOpen ? 'active' : ''}`} onClick={handleSearchOverlayClick}>
         <div className="navbar-search-modal" onClick={(e) => e.stopPropagation()}>
           <div className="navbar-search-header">
             <div className="navbar-search-input-wrapper">
@@ -245,7 +273,10 @@ function Navbar() {
               {searchQuery && (
                 <button 
                   className="navbar-search-clear"
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => {
+                    setSearchQuery('');
+                    localStorage.removeItem('searchQuery');
+                  }}
                   aria-label="Clear search"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -273,7 +304,6 @@ function Navbar() {
                             key={category.id}
                             to={`/category/${category.slug}`}
                             className="navbar-search-result-item cursor-target"
-                            onClick={handleSearchResultClick}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{category.name}</span>
@@ -297,7 +327,6 @@ function Navbar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="navbar-search-result-item cursor-target"
-                            onClick={handleSearchResultClick}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{subcategory.name}</span>
