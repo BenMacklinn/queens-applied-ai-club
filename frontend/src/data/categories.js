@@ -101,12 +101,6 @@ export const subcategories = {
       imageUrl: 'https://czkaugolflipptdehcnb.supabase.co/storage/v1/object/public/product-images/63355db1-13db-4b10-be06-1688167df5d5_primary.png'
     },
     {
-      name: 'TBPN Gong',
-      url: 'https://www.tbpnmerch.com/product/tbpn-gong',
-      slug: 'tbpn-gong',
-      imageUrl: 'https://czkaugolflipptdehcnb.supabase.co/storage/v1/object/public/product-images/f23f920e-a340-48b7-94ee-7826f22e1516_primary.jpg'
-    },
-    {
       name: 'Neckwear',
       url: 'https://www.tbpnmerch.com/product/29196130275002455779',
       slug: 'neckwear',
@@ -183,6 +177,12 @@ export const subcategories = {
       url: 'https://www.tbpnmerch.com/products/pins',
       slug: 'pins',
       imageUrl: 'https://czkaugolflipptdehcnb.supabase.co/storage/v1/object/public/product-images/a44d2880-0745-4c39-8a16-793b74f83067_primary.jpg'
+    },
+    {
+      name: 'TBPN Gong',
+      url: 'https://www.tbpnmerch.com/product/tbpn-gong',
+      slug: 'tbpn-gong',
+      imageUrl: 'https://czkaugolflipptdehcnb.supabase.co/storage/v1/object/public/product-images/f23f920e-a340-48b7-94ee-7826f22e1516_primary.jpg'
     },
     {
       name: 'Plates',
