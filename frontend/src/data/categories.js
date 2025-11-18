@@ -21,7 +21,7 @@ export const categories = [
     id: 3,
     name: 'Workstation',
     subtitle: 'Desk & Tech Gear',
-    imageUrl: '/TBPNHorse.jpg',
+    imageUrl: '/TBPNHorse.png',
     slug: 'desk-tech',
     description: 'Practical items for work setups'
   },
