@@ -1,4 +1,5 @@
 import './Footer.css';
+import { Link } from 'react-router-dom';
 import { categories } from '../data/categories';
 
 function Footer() {
@@ -14,9 +15,9 @@ function Footer() {
             <span className="footer-categories-group">
               {categories.map((category, index) => (
                 <span key={category.id}>
-                  <a href={`#${category.slug}`} className="footer-link footer-link-category cursor-target">
+                  <Link to={`/category/${category.slug}`} className="footer-link footer-link-category cursor-target">
                     {category.name}
-                  </a>
+                  </Link>
                   {index < categories.length - 1 && <span className="footer-separator">•</span>}
                 </span>
               ))}
