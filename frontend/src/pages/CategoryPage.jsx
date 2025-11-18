@@ -32,8 +32,6 @@ function CategoryPage() {
           <Link to="/" className="back-link">← Back to Home</Link>
           <div className="category-header">
             <h1 className="category-title">{category.name}</h1>
-            <p className="category-subtitle">{category.subtitle}</p>
-            <p className="category-description">{category.description}</p>
           </div>
           
           <div className="subcategories-grid">
@@ -45,6 +43,15 @@ function CategoryPage() {
                 rel="noopener noreferrer"
                 className="subcategory-card cursor-target"
               >
+                {subcategory.imageUrl && (
+                  <div className="subcategory-image-container">
+                    <img 
+                      src={subcategory.imageUrl} 
+                      alt={subcategory.name}
+                      className="subcategory-image"
+                    />
+                  </div>
+                )}
                 <div className="subcategory-card-content">
                   <h3 className="subcategory-name">{subcategory.name}</h3>
                   <span className="subcategory-link">View Products →</span>
