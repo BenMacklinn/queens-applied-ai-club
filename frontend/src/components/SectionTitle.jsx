@@ -18,8 +18,8 @@ function SectionTitle() {
   // Calculate opacity and position based on scroll
   let opacity = 0;
   let translateY = 50;
-  let merchandiseTranslateX = -100;
-  let categoriesTranslateX = 100;
+  let exploreTranslateX = -100;
+  let qvibeTranslateX = 100;
 
   if (sectionRef.current) {
     const rect = sectionRef.current.getBoundingClientRect();
@@ -28,8 +28,8 @@ function SectionTitle() {
     
     opacity = scrollProgress;
     translateY = (1 - scrollProgress) * 50;
-    merchandiseTranslateX = (1 - scrollProgress) * -100;
-    categoriesTranslateX = (1 - scrollProgress) * 100;
+    exploreTranslateX = (1 - scrollProgress) * -100;
+    qvibeTranslateX = (1 - scrollProgress) * 100;
   }
 
   return (
@@ -45,18 +45,27 @@ function SectionTitle() {
           <div 
             className="section-title-word section-title-word-merchandise"
             style={{
-              transform: `translateX(${merchandiseTranslateX}px) scaleY(0.6)`
+              transform: `translateX(${exploreTranslateX}px) scaleY(0.6)`
             }}
           >
-            MERCHANDISE
+            EXPLORE
           </div>
           <div 
             className="section-title-word section-title-word-categories"
             style={{
-              transform: `translateX(${categoriesTranslateX}px) scaleY(0.6)`
+              transform: `translateX(${qvibeTranslateX}px) scaleY(0.6)`
             }}
           >
-            CATEGORIES
+            <div className="carousel-container">
+              <div className="carousel-content">
+                <span>QUEEN'S APPLIED AI CLUB</span>
+                <span className="carousel-dot"></span>
+                <span>QUEEN'S APPLIED AI CLUB</span>
+                <span className="carousel-dot"></span>
+                <span>QUEEN'S APPLIED AI CLUB</span>
+                <span className="carousel-dot"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

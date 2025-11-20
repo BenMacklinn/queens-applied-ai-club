@@ -4,13 +4,16 @@
   min-width: 0;
   flex-shrink: 1;
   flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .category-card {
   position: relative;
   width: 100%;
   height: 700px;
-  background: white;
+  background: #1a1a1a;
   border-radius: 0;
   overflow: hidden;
   cursor: pointer;
@@ -25,7 +28,7 @@
 
 .category-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .category-card-image-container {
@@ -33,7 +36,10 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  background: #f5f5f5;
+  background: #252525;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-card-image-container::before {
@@ -43,12 +49,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--card-green);
-  opacity: 0.95;
+  background: var(--card-overlay, rgba(0, 0, 0, 0.4));
+  opacity: 0.7;
   mix-blend-mode: multiply;
   z-index: 1;
   transition: opacity 0.3s ease;
-  box-shadow: inset 0 0 100px rgba(0, 44, 33, 0.3);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
 }
 
 .category-card:hover .category-card-image-container::before {
@@ -61,8 +67,8 @@
   object-fit: cover;
   object-position: center;
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-  filter: brightness(0.6);
-  opacity: 0.9;
+  filter: brightness(0.5) grayscale(100%);
+  opacity: 0.85;
   transform: scale(0.95);
 }
 
@@ -71,9 +77,42 @@
   object-position: 30% center;
 }
 
+/* Get Involved category - shift image to the left */
+.category-card-image-container[data-category-slug="get-involved"] .category-card-image {
+  object-position: 20% center;
+}
+
+/* About Us category - zoom in */
+.category-card-image-container[data-category-slug="about-us"] .category-card-image {
+  transform: scale(1.4);
+  transform-origin: center center;
+}
+
+/* About Us category - maintain zoom on hover */
+.category-card:hover .category-card-image-container[data-category-slug="about-us"] .category-card-image {
+  transform: scale(1.4);
+}
+
+/* Projects category - shift image to the right */
+.category-card-image-container[data-category-slug="projects"] .category-card-image {
+  object-position: 55% center;
+}
+
+/* Events category - zoom in and shift to the left */
+.category-card-image-container[data-category-slug="events"] .category-card-image {
+  object-position: 35% center;
+  transform: scale(1.7);
+  transform-origin: center center;
+}
+
+/* Events category - maintain zoom on hover */
+.category-card:hover .category-card-image-container[data-category-slug="events"] .category-card-image {
+  transform: scale(1.7);
+}
+
 .category-card:hover .category-card-image {
   transform: scale(1);
-  filter: brightness(1);
+  filter: brightness(0.8) grayscale(0%);
   opacity: 1;
 }
 

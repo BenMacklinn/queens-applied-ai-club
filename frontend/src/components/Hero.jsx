@@ -47,42 +47,50 @@ function Hero() {
           <div className="hero-text" ref={heroTextRef}>
             <h1 className="hero-title">
               <span 
-                className="hero-title-line"
+                className="hero-title-line hero-title-line-1"
                 ref={el => titleLinesRef.current[0] = el}
               >
-                GET
+                Join
               </span>
               <span 
-                className="hero-title-line"
+                className="hero-title-line hero-title-line-2"
                 ref={el => titleLinesRef.current[1] = el}
               >
-                YOURSELF
+                Queen's University's
               </span>
               <div className="hero-title-green-block">
                 <span 
-                  className="hero-title-line hero-title-white"
+                  className="hero-title-line hero-title-white hero-title-line-3"
                   ref={el => titleLinesRef.current[2] = el}
                 >
-                  INTO TECH'S
+                  Fastest Growing
                 </span>
               </div>
               <div className="hero-title-green-block">
                 <span 
-                  className="hero-title-line hero-title-white"
+                  className="hero-title-line hero-title-white hero-title-line-4"
                   ref={el => titleLinesRef.current[3] = el}
                 >
-                  FAVOURITE GEAR
+                  AI Community
                 </span>
               </div>
             </h1>
             <div className="hero-cta" ref={ctaRef}>
-              Technology Business Programming Network
+              Queen's Applied AI Club | QVibe
             </div>
             <div className="hero-overlap-element"></div>
           </div>
           <div className="hero-image-wrapper">
-            <div className="hero-image-container">
-              <img src="/TBPNBoys.webp" alt="TBPN Merch" className="hero-image" />
+            <div className="hero-image-container cursor-target">
+              <video 
+                src="/QVibe Landing Movie.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                className="hero-image"
+                aria-label="QVibe Landing Video"
+              />
             </div>
           </div>
         </div>

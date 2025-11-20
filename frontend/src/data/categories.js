@@ -3,43 +3,43 @@
 export const categories = [
   {
     id: 1,
-    name: 'Wearables',
-    subtitle: 'Apparel',
-    imageUrl: '/JordiTunnel.png',
-    slug: 'apparel',
-    description: 'Anything you wear on your body'
+    name: 'About Us',
+    subtitle: 'Our Story',
+    imageUrl: '/CursorHackathon4.jpeg',
+    slug: 'about-us',
+    description: 'Learn about QVibe and our mission'
   },
   {
     id: 2,
-    name: 'Essentials',
-    subtitle: 'Accessories',
-    imageUrl: '/John&Jordi.jpg',
-    slug: 'accessories',
-    description: 'Wearable add-ons and carryables'
+    name: 'Projects',
+    subtitle: 'Our Work',
+    imageUrl: '/ProjectsPic.avif',
+    slug: 'projects',
+    description: 'Explore our portfolio and initiatives'
   },
   {
     id: 3,
-    name: 'Workstation',
-    subtitle: 'Desk & Tech Gear',
-    imageUrl: '/TBPNHorse.png',
-    slug: 'desk-tech',
-    description: 'Practical items for work setups'
+    name: 'Events',
+    subtitle: 'Upcoming & Past',
+    imageUrl: '/CursorHackathon5.jpeg',
+    slug: 'events',
+    description: 'Join us at our events and gatherings'
   },
   {
     id: 4,
-    name: 'Hydration',
-    subtitle: 'Drinkware',
-    imageUrl: '/DietTBPN.webp',
-    slug: 'drinkware',
-    description: 'Mugs, tumblers, bottles & coolers'
+    name: 'Our Team',
+    subtitle: 'Meet the People',
+    imageUrl: '/OurTeam.avif',
+    slug: 'our-team',
+    description: 'Get to know the QVibe team'
   },
   {
     id: 5,
-    name: 'Collectibles',
-    subtitle: 'Stickers & More',
-    imageUrl: '/GongHit.jpeg',
-    slug: 'collectibles',
-    description: 'Low-price dopamine buys'
+    name: 'Get Involved',
+    subtitle: 'Join Us',
+    imageUrl: '/GetInvolved.jpg',
+    slug: 'get-involved',
+    description: 'Ways to participate and contribute'
   }
 ];
 
@@ -49,6 +49,88 @@ export const heroImage = 'https://czkaugolflipptdehcnb.supabase.co/storage/v1/ob
 // Subcategories mapped to their parent category slugs
 // Image URLs from scraped data
 export const subcategories = {
+  'about-us': [
+    {
+      name: 'Our Mission',
+      url: '#',
+      slug: 'mission',
+      imageUrl: '/JordiTunnel.png'
+    },
+    {
+      name: 'Our Values',
+      url: '#',
+      slug: 'values',
+      imageUrl: '/John&Jordi.jpg'
+    },
+    {
+      name: 'History',
+      url: '#',
+      slug: 'history',
+      imageUrl: '/TBPNHorse.png'
+    }
+  ],
+  'events': [
+    {
+      name: 'Upcoming Events',
+      url: '#',
+      slug: 'upcoming',
+      imageUrl: '/DietTBPN.webp'
+    },
+    {
+      name: 'Past Events',
+      url: '#',
+      slug: 'past',
+      imageUrl: '/GongHit.jpeg'
+    }
+  ],
+  'projects': [
+    {
+      name: 'Current Projects',
+      url: '#',
+      slug: 'current',
+      imageUrl: '/JordiTunnel.png'
+    },
+    {
+      name: 'Completed Projects',
+      url: '#',
+      slug: 'completed',
+      imageUrl: '/John&Jordi.jpg'
+    }
+  ],
+  'our-team': [
+    {
+      name: 'Leadership',
+      url: '#',
+      slug: 'leadership',
+      imageUrl: '/TBPNHorse.png'
+    },
+    {
+      name: 'Team Members',
+      url: '#',
+      slug: 'members',
+      imageUrl: '/DietTBPN.webp'
+    }
+  ],
+  'get-involved': [
+    {
+      name: 'Volunteer',
+      url: '#',
+      slug: 'volunteer',
+      imageUrl: '/GongHit.jpeg'
+    },
+    {
+      name: 'Partnerships',
+      url: '#',
+      slug: 'partnerships',
+      imageUrl: '/JordiTunnel.png'
+    },
+    {
+      name: 'Contact',
+      url: '#',
+      slug: 'contact',
+      imageUrl: '/John&Jordi.jpg'
+    }
+  ],
   'apparel': [
     {
       name: 'Polo Shirts',

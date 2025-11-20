@@ -8,7 +8,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-logo">
-            <img src="/TBONLogo.png" alt="TBPN Logo" className="footer-logo-img" />
+            <img src="/QVibeLogo.png" alt="QVibe Logo" className="footer-logo-img" />
           </div>
           
           <div className="footer-links">

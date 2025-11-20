@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import './CategoryCard.css';
 
 const CategoryCard = forwardRef(({ category, index }, ref) => {
-  const borderColors = ['#002C21', '#004D3B', '#006145', '#017956', '#029865'];
-  const borderColor = borderColors[index % borderColors.length];
+  const paletteColors = ['#C48BD4', '#8A7BCF', '#76A7E4', '#63B4EB', '#2665A8'];
+  const borderColor = paletteColors[index % paletteColors.length];
   
   return (
     <div 
@@ -14,7 +14,7 @@ const CategoryCard = forwardRef(({ category, index }, ref) => {
       <Link 
         to={`/category/${category.slug}`}
         className="category-card cursor-target" 
-        style={{ borderColor: borderColor, '--card-green': borderColor }} 
+        style={{ borderColor: borderColor, '--card-overlay': 'rgba(0, 0, 0, 0.4)' }} 
         data-index={index}
       >
         <div className="category-card-image-container" data-category-slug={category.slug}>

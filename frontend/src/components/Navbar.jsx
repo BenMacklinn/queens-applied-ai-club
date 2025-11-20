@@ -177,7 +177,7 @@ function Navbar() {
         <div className="navbar-container">
           <div className="navbar-left">
             <Link to="/" className="navbar-logo cursor-target">
-              <img src="/TBONLogo.png" alt="TBPN Logo" className="navbar-logo-img" />
+              <img src="/QVibeLogo.png" alt="QVibe Logo" className="navbar-logo-img" />
             </Link>
             <button 
               className={`navbar-menu-toggle cursor-target ${isMenuOpen ? 'active' : ''}`}
@@ -205,13 +205,6 @@ function Navbar() {
                 <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               </svg>
             </button>
-            <button className="navbar-icon cursor-target" aria-label="Cart">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 2L6 9H3l3 11h12l3-11h-3l-3-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M9 2h6l3 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span className="navbar-cart-badge">0</span>
-            </button>
           </div>
         </div>
       </nav>
@@ -223,9 +216,9 @@ function Navbar() {
           </div>
           <nav className="navbar-menu-nav">
             {categories.map((category, index) => {
-              const borderColors = ['#002C21', '#004D3B', '#006145', '#017956', '#029865'];
+              const borderColors = ['#C48BD4', '#8A7BCF', '#76A7E4', '#63B4EB', '#2665A8'];
               const hoverColor = borderColors[index % borderColors.length];
-              // Convert hex to rgba with higher opacity to show green colors
+              // Convert hex to rgba with higher opacity to show QVibe colors
               const hex = hoverColor.replace('#', '');
               const r = parseInt(hex.substr(0, 2), 16);
               const g = parseInt(hex.substr(2, 2), 16);
