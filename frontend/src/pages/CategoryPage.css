@@ -64,17 +64,23 @@
 
 .subcategories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, 280px);
   gap: 24px;
   margin-top: 40px;
+  justify-content: start;
 }
 
 /* Projects Page Styles */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, 350px);
   gap: 24px;
   margin-top: 40px;
+  justify-content: start;
+}
+
+.events-grid {
+  grid-template-columns: repeat(auto-fill, 420px);
 }
 
 .project-card {
@@ -94,6 +100,14 @@
   opacity: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  aspect-ratio: 1 / 1;
+  max-width: 350px;
+  width: 100%;
+}
+
+.event-card {
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
 }
 
 .project-card::before {
@@ -121,7 +135,7 @@
 
 .project-image-container {
   width: 100%;
-  height: 240px;
+  flex: 1;
   overflow: hidden;
   background: #ffffff;
   position: relative;
@@ -134,7 +148,7 @@
 .project-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.3s ease, filter 0.3s ease;
   background: #ffffff;
   filter: grayscale(100%);
@@ -151,20 +165,20 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 28px 32px;
+  padding: 20px 24px;
   background: #1a1a1a;
-  flex: 1;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .project-name {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
   font-family: 'Space Grotesk', sans-serif;
   color: #ffffff;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   text-transform: none;
   letter-spacing: 0.3px;
   transition: color 0.3s ease;
@@ -176,7 +190,7 @@
 }
 
 .project-view-more {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
   color: #666666;
@@ -378,21 +392,23 @@
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, 280px);
   gap: 24px;
+  margin-top: 40px;
+  justify-content: start;
 }
 
 .team-grid-pres {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, 280px);
 }
 
 .team-grid-director {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, 280px);
 }
 
 .team-grid-advisor,
 .team-grid-head {
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, 280px);
 }
 
 .team-card {
@@ -408,36 +424,13 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  text-align: left;
   opacity: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.team-image-container {
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  max-width: 280px;
   width: 100%;
-  height: 240px;
-  overflow: hidden;
-  background: #0a0a0a;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 2px solid var(--team-border-color, #2665A8);
-}
-
-.team-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: grayscale(100%);
-  opacity: 0.7;
-}
-
-.team-card:hover .team-image {
-  transform: scale(1.05);
-  filter: grayscale(0%);
-  opacity: 1;
 }
 
 .team-card::before {
@@ -458,32 +451,61 @@
 }
 
 .team-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(38, 101, 168, 0.15);
-  border-color: #63B4EB;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(38, 101, 168, 0.25);
+  border-color: var(--team-border-color, #76A7E4);
+}
+
+.team-image-container {
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid var(--team-border-color, #2665A8);
+}
+
+.team-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  background: #ffffff;
+  filter: grayscale(100%);
+  opacity: 0.8;
+}
+
+.team-card:hover .team-image {
+  transform: scale(1.02);
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
 .team-card-content {
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 24px 20px;
+  padding: 16px 20px;
   background: #1a1a1a;
-  flex: 1;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .team-member-name {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   font-family: 'Space Grotesk', sans-serif;
   color: #ffffff;
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   text-transform: none;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   transition: color 0.3s ease;
+  line-height: 1.2;
 }
 
 .team-card:hover .team-member-name {
@@ -491,7 +513,7 @@
 }
 
 .team-member-position {
-  font-size: 15px;
+  font-size: 11px;
   color: #b0b0b0;
   font-weight: 400;
   font-family: 'Inter', sans-serif;
@@ -524,9 +546,11 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  min-height: 100%;
   /* Hide initially to prevent flash - GSAP will animate */
   opacity: 0;
+  aspect-ratio: 1 / 1;
+  max-width: 280px;
+  width: 100%;
 }
 
 .subcategory-card::before {
@@ -554,7 +578,7 @@
 
 .subcategory-image-container {
   width: 100%;
-  height: 180px;
+  flex: 1;
   overflow: hidden;
   background: #0a0a0a;
   position: relative;
@@ -580,9 +604,9 @@
 .subcategory-card-content {
   position: relative;
   z-index: 1;
-  padding: 32px;
+  padding: 20px 24px;
   background: #1a1a1a;
-  flex: 1;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
 }
@@ -620,13 +644,33 @@
   }
   
   .subcategories-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, 280px);
     gap: 20px;
+    justify-content: start;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, 350px);
+    gap: 20px;
+    justify-content: start;
+  }
+  
+  .project-card {
+    max-width: 350px;
+  }
+  
+  .events-grid {
+    grid-template-columns: repeat(auto-fill, 400px);
+  }
+  
+  .event-card {
+    max-width: 400px;
   }
   
   .team-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, 280px);
     gap: 20px;
+    justify-content: start;
   }
 }
 
@@ -856,17 +900,25 @@
     padding: 0;
   }
   
+  .project-card {
+    aspect-ratio: 1 / 1;
+  }
+  
   .project-image-container {
-    height: 180px;
+    flex: 1;
   }
   
   .project-card-content {
-    padding: 20px 24px;
+    padding: 16px;
   }
   
   .project-name {
-    font-size: 22px;
+    font-size: 18px;
     margin-bottom: 0;
+  }
+  
+  .project-view-more {
+    font-size: 11px;
   }
   
   .project-modal {
@@ -1118,37 +1170,65 @@
   }
   
   .team-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, 250px);
     gap: 16px;
+    justify-content: start;
   }
   
   .team-card {
     padding: 0;
+    max-width: 250px;
+    aspect-ratio: 1 / 1;
   }
   
-  .team-image-container {
-    height: 200px;
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 16px;
+    justify-content: start;
   }
   
-  .team-card-content {
-    padding: 20px 16px;
+  .project-card {
+    max-width: 300px;
   }
   
-  .team-member-name {
-    font-size: 20px;
-    margin-bottom: 6px;
+  .events-grid {
+    grid-template-columns: repeat(auto-fill, 350px);
   }
   
-  .team-member-position {
-    font-size: 13px;
+  .event-card {
+    max-width: 350px;
+  }
+  
+  .subcategories-grid {
+    grid-template-columns: repeat(auto-fill, 250px);
+    gap: 16px;
+    justify-content: start;
   }
   
   .subcategory-card {
     padding: 0;
+    max-width: 250px;
+  }
+  
+  .team-image-container {
+    flex: 1;
+  }
+  
+  .team-card-content {
+    padding: 12px 16px;
+  }
+  
+  .team-member-name {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  
+  .team-member-position {
+    font-size: 10px;
   }
   
   .subcategory-image-container {
-    height: 160px;
+    flex: 1;
     padding: 12px;
   }
   

@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 import { categories, subcategories } from '../data/categories';
+import { projects, events, teamMembers } from '../data/searchData';
 import './Navbar.css';
 
 function Navbar() {
@@ -133,6 +135,17 @@ function Navbar() {
 
   const handleCategoryClick = () => {
     setIsMenuOpen(false);
+    // Hide target cursor when clicking sidebar menu items
+    const cursorElement = document.querySelector('.target-cursor-wrapper');
+    if (cursorElement) {
+      const cursorStyle = window.getComputedStyle(cursorElement);
+      if (cursorStyle.opacity !== '0') {
+        gsap.to(cursorElement, {
+          opacity: 0,
+          duration: 0.2
+        });
+      }
+    }
   };
 
   const handleSearchOverlayClick = () => {
@@ -143,16 +156,19 @@ function Navbar() {
   // Search function
   const getSearchResults = () => {
     if (!searchQuery.trim()) {
-      return { categories: [], subcategories: [] };
+      return { categories: [], subcategories: [], projects: [], events: [], teamMembers: [] };
     }
 
     const query = searchQuery.toLowerCase().trim();
+    
+    // Search categories
     const matchedCategories = categories.filter(cat => 
       cat.name.toLowerCase().includes(query) ||
       cat.subtitle.toLowerCase().includes(query) ||
       cat.description.toLowerCase().includes(query)
     );
 
+    // Search subcategories
     const matchedSubcategories = [];
     Object.entries(subcategories).forEach(([categorySlug, subs]) => {
       subs.forEach(sub => {
@@ -166,7 +182,33 @@ function Navbar() {
       });
     });
 
-    return { categories: matchedCategories, subcategories: matchedSubcategories };
+    // Search projects
+    const matchedProjects = projects.filter(project =>
+      project.name.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query.split(' ')[0]) // Search by words in description
+    );
+
+    // Search events
+    const matchedEvents = events.filter(event =>
+      event.name.toLowerCase().includes(query) ||
+      event.description.toLowerCase().includes(query)
+    );
+
+    // Search team members
+    const matchedTeamMembers = teamMembers.filter(member =>
+      member.name.toLowerCase().includes(query) ||
+      member.position.toLowerCase().includes(query) ||
+      member.name.toLowerCase().split(' ').some(word => word.includes(query)) // Search by first/last name
+    );
+
+    return { 
+      categories: matchedCategories, 
+      subcategories: matchedSubcategories,
+      projects: matchedProjects,
+      events: matchedEvents,
+      teamMembers: matchedTeamMembers
+    };
   };
 
   const searchResults = getSearchResults();
@@ -283,12 +325,82 @@ function Navbar() {
           <div className="navbar-search-results">
             {searchQuery.trim() ? (
               <>
-                {searchResults.categories.length === 0 && searchResults.subcategories.length === 0 ? (
+                {searchResults.categories.length === 0 && 
+                 searchResults.subcategories.length === 0 &&
+                 searchResults.projects.length === 0 &&
+                 searchResults.events.length === 0 &&
+                 searchResults.teamMembers.length === 0 ? (
                   <div className="navbar-search-empty">
                     <p>No results found for "{searchQuery}"</p>
                   </div>
                 ) : (
                   <>
+                    {searchResults.projects.length > 0 && (
+                      <div className="navbar-search-section">
+                        <h3 className="navbar-search-section-title">Projects</h3>
+                        {searchResults.projects.map((project, index) => (
+                          <Link
+                            key={`project-${index}`}
+                            to={`/category/${project.slug}`}
+                            className="navbar-search-result-item cursor-target"
+                            onClick={handleCategoryClick}
+                          >
+                            <div className="navbar-search-result-content">
+                              <span className="navbar-search-result-name">{project.name}</span>
+                              <span className="navbar-search-result-subtitle">{project.description.substring(0, 60)}...</span>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                    {searchResults.events.length > 0 && (
+                      <div className="navbar-search-section">
+                        <h3 className="navbar-search-section-title">Events</h3>
+                        {searchResults.events.map((event, index) => (
+                          <Link
+                            key={`event-${index}`}
+                            to={`/category/${event.slug}`}
+                            className="navbar-search-result-item cursor-target"
+                            onClick={handleCategoryClick}
+                          >
+                            <div className="navbar-search-result-content">
+                              <span className="navbar-search-result-name">{event.name}</span>
+                              <span className="navbar-search-result-subtitle">{event.description.substring(0, 60)}...</span>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                    {searchResults.teamMembers.length > 0 && (
+                      <div className="navbar-search-section">
+                        <h3 className="navbar-search-section-title">Team Members</h3>
+                        {searchResults.teamMembers.map((member, index) => (
+                          <Link
+                            key={`member-${index}`}
+                            to={`/category/${member.slug}`}
+                            className="navbar-search-result-item cursor-target"
+                            onClick={handleCategoryClick}
+                          >
+                            <div className="navbar-search-result-content">
+                              <span className="navbar-search-result-name">{member.name}</span>
+                              <span className="navbar-search-result-subtitle">{member.position}</span>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
                     {searchResults.categories.length > 0 && (
                       <div className="navbar-search-section">
                         <h3 className="navbar-search-section-title">Categories</h3>
@@ -297,6 +409,7 @@ function Navbar() {
                             key={category.id}
                             to={`/category/${category.slug}`}
                             className="navbar-search-result-item cursor-target"
+                            onClick={handleCategoryClick}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{category.name}</span>
@@ -320,6 +433,7 @@ function Navbar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="navbar-search-result-item cursor-target"
+                            onClick={handleCategoryClick}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{subcategory.name}</span>
