@@ -22,16 +22,12 @@ function Footer() {
                 </span>
               ))}
             </span>
-            <span className="footer-separator">•</span>
-            <a href="https://www.tbpnmerch.com/blog" className="footer-link footer-link-blog cursor-target">Blog</a>
-            <span className="footer-separator">•</span>
-            <a href="mailto:tbpnmerch@gmail.com" className="footer-link footer-link-contact cursor-target">Contact Us</a>
           </div>
         </div>
         
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © 2025 TBPN - Technology Brothers Podcast Network. All rights reserved.
+            © 2025 Queen's Applied AI Club | QVibe. All rights reserved.
           </p>
         </div>
       </div>
