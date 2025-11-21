@@ -4,7 +4,7 @@
   background: #0a0a0a;
   overflow: hidden;
   z-index: 8;
-  margin: -30px 0 -30px 0;
+  margin: 60px 0 80px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,7 +77,7 @@
 @media (max-width: 968px) {
   .section-transition {
     height: 50px;
-    margin: -25px 0 -25px 0;
+    margin: 40px 0 60px 0;
   }
 
   .transition-line {
@@ -93,7 +93,7 @@
 @media (max-width: 640px) {
   .section-transition {
     height: 40px;
-    margin: -20px 0 -20px 0;
+    margin: 30px 0 50px 0;
   }
 
   .transition-line {

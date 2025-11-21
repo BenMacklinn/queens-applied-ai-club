@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import './AnimatedChart.css';
 
 function AnimatedChart() {
