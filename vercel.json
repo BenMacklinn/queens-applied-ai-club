@@ -4,7 +4,7 @@
   "installCommand": "cd frontend && npm install",
   "rewrites": [
     {
-      "source": "/((?!.*\\.(mp4|avif|png|jpg|jpeg|svg|webp|ico|woff|woff2|ttf|eot)).*)",
+      "source": "/((?!.*\\.(?:mp4|avif|png|jpg|jpeg|svg|webp|ico|woff|woff2|ttf|eot)).*)",
       "destination": "/index.html"
     }
   ],
