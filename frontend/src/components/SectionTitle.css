@@ -41,6 +41,8 @@
   text-shadow: 0 0 30px rgba(196, 139, 212, 0.4), 0 4px 20px rgba(0, 0, 0, 0.5);
   position: relative;
   letter-spacing: 28px;
+  font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 700;
 }
 
 .section-title-word-categories {
@@ -107,6 +109,8 @@
   white-space: nowrap;
   height: 100%;
   line-height: 1;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 700;
 }
 
 .carousel-dot {

@@ -4,11 +4,30 @@
   left: 0;
   right: 0;
   width: 100%;
-  background: rgba(26, 26, 26, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(196, 139, 212, 0.3) 20%,
+    rgba(118, 167, 228, 0.3) 50%,
+    rgba(99, 180, 235, 0.3) 80%,
+    transparent 100%
+  );
 }
 
 .navbar-hidden {
@@ -18,11 +37,12 @@
 .navbar-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 16px 40px;
+  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 
 .navbar-left {
@@ -41,22 +61,37 @@
   height: 60px;
   width: auto;
   object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 8px rgba(99, 180, 235, 0.2));
+}
+
+.navbar-logo:hover .navbar-logo-img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 12px rgba(99, 180, 235, 0.4));
 }
 
 .navbar-menu-toggle {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar-menu-toggle:hover {
-  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(99, 180, 235, 0.4);
+  transform: scale(1.05);
+}
+
+.navbar-menu-toggle.active {
+  background: rgba(99, 180, 235, 0.15);
+  border-color: rgba(99, 180, 235, 0.5);
 }
 
 .navbar-right {
@@ -66,20 +101,24 @@
 }
 
 .navbar-icon {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar-icon:hover {
-  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(99, 180, 235, 0.4);
+  transform: scale(1.05);
+  color: rgba(99, 180, 235, 0.9);
 }
 
 .navbar-cart-badge {

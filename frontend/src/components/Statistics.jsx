@@ -1,11 +1,16 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import AnimatedChart from './AnimatedChart';
+import { projects } from '../data/searchData';
 import './Statistics.css';
+
+// Get dynamic project count
+const projectCount = projects.length;
 
 const stats = [
   {
     id: 'members',
-    value: 500,
+    value: 85,
     suffix: '+',
     label: 'Active Members',
     description: 'Students & Alumni',
@@ -13,24 +18,24 @@ const stats = [
   },
   {
     id: 'projects',
-    value: 75,
-    suffix: '+',
+    value: projectCount,
+    suffix: '',
     label: 'Projects Completed',
     description: 'AI & ML Innovations',
     gradient: 'linear-gradient(135deg, #8A7BCF 0%, #76A7E4 100%)'
   },
   {
     id: 'events',
-    value: 40,
-    suffix: '+',
+    value: 2,
+    suffix: '',
     label: 'Events Hosted',
     description: 'Workshops & Meetups',
     gradient: 'linear-gradient(135deg, #76A7E4 0%, #63B4EB 100%)'
   },
   {
     id: 'workshops',
-    value: 25,
-    suffix: '+',
+    value: 1,
+    suffix: '',
     label: 'Workshops',
     description: 'Hands-On Learning',
     gradient: 'linear-gradient(135deg, #63B4EB 0%, #2665A8 100%)'
@@ -131,48 +136,53 @@ function Statistics() {
   return (
     <section className="statistics" ref={sectionRef}>
       <div className="statistics-container">
-        <div className="statistics-header">
-          <h2 className="statistics-title">
-            <span className="statistics-title-line">By The</span>
-            <span className="statistics-title-accent">Numbers</span>
-          </h2>
-          <p className="statistics-subtitle">
-            Growing the AI community at Queen's, one project at a time
-          </p>
+        <div className="statistics-left-bg">
+          <div className="statistics-header">
+            <h2 className="statistics-title">
+              <span className="statistics-title-line">By The</span>
+              <span className="statistics-title-accent">Numbers</span>
+            </h2>
+            <p className="statistics-subtitle">
+              Growing the AI community at Queen's, one project at a time
+            </p>
+            <AnimatedChart />
+          </div>
         </div>
 
-        <div className="statistics-grid">
-          {stats.map((stat, index) => (
-            <div 
-              key={stat.id} 
-              className="stat-card"
-              style={{ '--gradient': stat.gradient }}
-            >
-              <div className="stat-card-inner">
-                <div className="stat-progress-bar">
-                  <div 
-                    className="stat-progress"
-                    style={{ 
-                      background: stat.gradient,
-                      width: '0%'
-                    }}
-                  ></div>
-                </div>
-                
-                <div className="stat-content">
-                  <div className="stat-number-wrapper">
-                    <span className="stat-number">0</span>
-                    <span className="stat-suffix">{stat.suffix}</span>
+        <div className="statistics-right-bg">
+          <div className="statistics-grid">
+            {stats.map((stat, index) => (
+              <div 
+                key={stat.id} 
+                className="stat-card"
+                style={{ '--gradient': stat.gradient }}
+              >
+                <div className="stat-card-inner">
+                  <div className="stat-progress-bar">
+                    <div 
+                      className="stat-progress"
+                      style={{ 
+                        background: stat.gradient,
+                        width: '0%'
+                      }}
+                    ></div>
                   </div>
                   
-                  <div className="stat-label">{stat.label}</div>
-                  <div className="stat-description">{stat.description}</div>
-                </div>
+                  <div className="stat-content">
+                    <div className="stat-number-wrapper">
+                      <span className="stat-number">0</span>
+                      <span className="stat-suffix">{stat.suffix}</span>
+                    </div>
+                    
+                    <div className="stat-label">{stat.label}</div>
+                    <div className="stat-description">{stat.description}</div>
+                  </div>
 
-                <div className="stat-card-glow"></div>
+                  <div className="stat-card-glow"></div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
