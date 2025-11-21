@@ -88,6 +88,7 @@ function Hero() {
                 loop 
                 muted 
                 playsInline 
+                preload="auto"
                 className="hero-image"
                 aria-label="QVibe Landing Video"
               />

@@ -102,7 +102,6 @@ function CategoryPage() {
     {
       level: 'Director',
       title: 'Director of Partnerships',
-      description: 'Find speakers and partnerships for events.',
       members: [
         { name: 'Matthew Bowman', imageUrl: '/Matthew Bowman.jpeg', linkedin: 'https://www.linkedin.com/in/matthew-bowman-4a0874388/' },
         { name: 'Jacob Shull', imageUrl: '/Jacob Shull.png', linkedin: 'https://www.linkedin.com/in/jacob-shull-95b019221/' }
@@ -118,7 +117,6 @@ function CategoryPage() {
     {
       level: 'Director',
       title: 'General Member Director',
-      description: 'Sends Email to events and helps connect people to help.',
       members: [
         { name: 'Max Rainville', imageUrl: '/Max Rainville.png', linkedin: 'https://www.linkedin.com/in/max-rainville-5814642a8/' }
       ]
