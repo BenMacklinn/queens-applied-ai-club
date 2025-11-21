@@ -6,12 +6,13 @@ export default defineConfig({
   plugins: [react()],
   build: {
     assetsInlineLimit: 0, // Don't inline assets, keep video as separate file
+    copyPublicDir: true, // Ensure public folder files are copied as-is
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          // Keep video files with original names
+          // Keep video files with original names and in root, not in assets folder
           if (assetInfo.name && assetInfo.name.endsWith('.mp4')) {
-            return 'assets/[name].[ext]'
+            return '[name].[ext]'
           }
           return 'assets/[name]-[hash].[ext]'
         }

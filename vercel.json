@@ -9,7 +9,7 @@
   ],
   "headers": [
     {
-      "source": "/(.*\\.mp4)",
+      "source": "/QVibe Landing Movie.mp4",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,126 +1,130 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Statistics.css';
 
-gsap.registerPlugin(ScrollTrigger);
+const stats = [
+  {
+    id: 'members',
+    value: 500,
+    suffix: '+',
+    label: 'Active Members',
+    description: 'Students & Alumni',
+    gradient: 'linear-gradient(135deg, #C48BD4 0%, #8A7BCF 100%)'
+  },
+  {
+    id: 'projects',
+    value: 75,
+    suffix: '+',
+    label: 'Projects Completed',
+    description: 'AI & ML Innovations',
+    gradient: 'linear-gradient(135deg, #8A7BCF 0%, #76A7E4 100%)'
+  },
+  {
+    id: 'events',
+    value: 40,
+    suffix: '+',
+    label: 'Events Hosted',
+    description: 'Workshops & Meetups',
+    gradient: 'linear-gradient(135deg, #76A7E4 0%, #63B4EB 100%)'
+  },
+  {
+    id: 'workshops',
+    value: 25,
+    suffix: '+',
+    label: 'Workshops',
+    description: 'Hands-On Learning',
+    gradient: 'linear-gradient(135deg, #63B4EB 0%, #2665A8 100%)'
+  }
+];
 
 function Statistics() {
   const sectionRef = useRef(null);
-  const [counters, setCounters] = useState({
-    members: 0,
-    projects: 0,
-    events: 0,
-    workshops: 0
-  });
-
-  const stats = [
-    {
-      id: 'members',
-      value: 500,
-      suffix: '+',
-      label: 'Active Members',
-      description: 'Students & Alumni',
-      gradient: 'linear-gradient(135deg, #C48BD4 0%, #8A7BCF 100%)'
-    },
-    {
-      id: 'projects',
-      value: 75,
-      suffix: '+',
-      label: 'Projects Completed',
-      description: 'AI & ML Innovations',
-      gradient: 'linear-gradient(135deg, #8A7BCF 0%, #76A7E4 100%)'
-    },
-    {
-      id: 'events',
-      value: 40,
-      suffix: '+',
-      label: 'Events Hosted',
-      description: 'Workshops & Meetups',
-      gradient: 'linear-gradient(135deg, #76A7E4 0%, #63B4EB 100%)'
-    },
-    {
-      id: 'workshops',
-      value: 25,
-      suffix: '+',
-      label: 'Workshops',
-      description: 'Hands-On Learning',
-      gradient: 'linear-gradient(135deg, #63B4EB 0%, #2665A8 100%)'
-    }
-  ];
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const statCards = sectionRef.current.querySelectorAll('.stat-card');
-    const statNumbers = sectionRef.current.querySelectorAll('.stat-number');
+    const numberElements = sectionRef.current.querySelectorAll('.stat-number');
+    const progressElements = sectionRef.current.querySelectorAll('.stat-progress');
 
     // Set initial state
     gsap.set(statCards, { opacity: 0, y: 60, scale: 0.8 });
-    gsap.set(statNumbers, { opacity: 0, scale: 0.5 });
+    gsap.set(numberElements, { opacity: 0, scale: 0.5 });
 
-    // Create timeline with ScrollTrigger
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse'
-      }
-    });
+    let hasAnimated = false;
+    const countersAnimated = new Set();
 
-    // Animate cards in sequentially
-    statCards.forEach((card, index) => {
-      tl.to(card, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: 'back.out(1.7)'
-      }, index * 0.15);
-    });
+    const animateStats = () => {
+      if (!sectionRef.current) return;
 
-    // Animate numbers counting up
-    statCards.forEach((card, index) => {
-      const stat = stats[index];
-      const numberElement = card.querySelector('.stat-number');
-      const progressElement = card.querySelector('.stat-progress');
+      const rect = sectionRef.current.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
 
-      if (numberElement && progressElement) {
-        gsap.to({ value: 0 }, {
-          value: stat.value,
-          duration: 2,
-          delay: index * 0.2 + 0.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          },
-          onUpdate: function() {
-            const currentValue = Math.floor(this.targets()[0].value);
-            numberElement.textContent = currentValue;
+      if (isInView && !hasAnimated) {
+        hasAnimated = true;
+
+        // Animate cards in sequentially
+        const tl = gsap.timeline();
+        statCards.forEach((card, index) => {
+          tl.to(card, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.7)'
+          }, index * 0.15);
+        });
+
+        // Animate numbers counting up
+        statCards.forEach((card, index) => {
+          const stat = stats[index];
+          const numberElement = card.querySelector('.stat-number');
+          const progressElement = card.querySelector('.stat-progress');
+
+          if (numberElement && progressElement && !countersAnimated.has(index)) {
+            countersAnimated.add(index);
             
-            // Animate number appearance
-            gsap.to(numberElement, {
-              opacity: 1,
-              scale: 1,
-              duration: 0.3
-            });
+            gsap.to({ value: 0 }, {
+              value: stat.value,
+              duration: 2,
+              delay: index * 0.2 + 0.5,
+              ease: 'power2.out',
+              onUpdate: function() {
+                const currentValue = Math.floor(this.targets()[0].value);
+                numberElement.textContent = currentValue;
+                
+                // Animate number appearance
+                gsap.to(numberElement, {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.3
+                });
 
-            // Animate progress bar
-            const progress = (currentValue / stat.value) * 100;
-            gsap.to(progressElement, {
-              width: `${progress}%`,
-              duration: 0.1
+                // Animate progress bar
+                const progress = (currentValue / stat.value) * 100;
+                gsap.to(progressElement, {
+                  width: `${progress}%`,
+                  duration: 0.1
+                });
+              }
             });
           }
         });
       }
-    });
+    };
+
+    // Initial check
+    animateStats();
+
+    // Scroll listener
+    const handleScroll = () => {
+      animateStats();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

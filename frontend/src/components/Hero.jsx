@@ -6,6 +6,7 @@ function Hero() {
   const heroTextRef = useRef(null);
   const titleLinesRef = useRef([]);
   const ctaRef = useRef(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (!heroTextRef.current) return;
@@ -37,6 +38,42 @@ function Hero() {
       duration: 0.6,
       ease: 'power2.out'
     }, '-=0.3');
+  }, []);
+
+  // Ensure video plays
+  useEffect(() => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      video.muted = true; // Ensure muted for autoplay
+      video.playsInline = true; // Ensure playsInline for mobile
+      
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Video is playing
+            console.log('Video playing successfully');
+          })
+          .catch((error) => {
+            // Autoplay was prevented, try again on user interaction
+            console.log('Autoplay prevented, waiting for user interaction');
+            const playOnInteraction = () => {
+              video.play();
+              document.removeEventListener('click', playOnInteraction);
+              document.removeEventListener('touchstart', playOnInteraction);
+            };
+            document.addEventListener('click', playOnInteraction, { once: true });
+            document.addEventListener('touchstart', playOnInteraction, { once: true });
+          });
+      }
+
+      // Also handle video loading
+      video.addEventListener('loadeddata', () => {
+        video.play().catch(() => {
+          // Autoplay blocked, will play on interaction
+        });
+      });
+    }
   }, []);
 
   return (
@@ -83,6 +120,7 @@ function Hero() {
           <div className="hero-image-wrapper">
             <div className="hero-image-container cursor-target">
               <video 
+                ref={videoRef}
                 src="/QVibe Landing Movie.mp4" 
                 autoPlay 
                 loop 
