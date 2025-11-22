@@ -50,7 +50,7 @@ export const teamMembers = [
   { name: 'Meyer Eskin', position: 'Director of Marketing', slug: 'our-team' },
   { name: 'Tanry Wang', position: 'Director of Logistics', slug: 'our-team' },
   { name: 'Julian Chan', position: 'Director of Logistics', slug: 'our-team' },
-  { name: 'Alex', position: 'Director of Strategy', slug: 'our-team' },
+  { name: 'Alex Wittstock', position: 'Director of Strategy', slug: 'our-team' },
   { name: 'Jay Persaud', position: 'Head Of Culture', slug: 'our-team' }
 ];
 

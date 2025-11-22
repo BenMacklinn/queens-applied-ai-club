@@ -142,7 +142,7 @@ function CategoryPage() {
       level: 'Director',
       title: 'Director of Strategy',
       members: [
-        { name: 'Alex', imageUrl: null, linkedin: null }
+        { name: 'Alex Wittstock', imageUrl: '/AlexWittstock.jpeg', linkedin: 'https://www.linkedin.com/in/alex-wittstock-69363929a/' }
       ]
     },
     {
