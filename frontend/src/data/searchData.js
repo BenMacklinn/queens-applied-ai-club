@@ -15,7 +15,7 @@ export const projects = [
   },
   { 
     name: 'Recover', 
-    description: 'Built by Greg Brenner (Kinesiology), Greg created an iOS app that helps users recover from injuries by tracking their progress and providing personalized exercises.',
+    description: 'Built by Greg Brenner (Kinesiology), Greg created an iOS app that helped users recover from injuries by tracking their progress and providing personalized exercises.',
     imageUrl: 'https://www.qvibe.online/Recover.png',
     slug: 'projects'
   }
@@ -24,7 +24,7 @@ export const projects = [
 export const events = [
   {
     name: 'Cursor x QVibe Hackathon',
-    description: 'Join us for an exciting hackathon where students come together to build innovative AI-powered projects. Collaborate, learn, and showcase your skills in a competitive yet supportive environment.',
+    description: 'We hosted an exciting hackathon where students came together to build innovative AI-powered projects. They collaborated, learned, and showcased their skills in a competitive yet supportive environment.',
     date: '2025-11-09',
     imageUrl: '/CursorHackathon5.jpeg',
     images: [
@@ -45,7 +45,7 @@ export const events = [
   },
   {
     name: 'Personal Website Workshop',
-    description: 'Learn hands-on web development techniques and tools. This workshop covers building personal websites from scratch, including design, development, and deployment. Perfect for beginners and experienced developers alike.',
+    description: 'We taught hands-on web development techniques and tools. This workshop covered building personal websites from scratch, including design, development, and deployment. It was perfect for beginners and experienced developers alike.',
     date: '2025-11-21',
     imageUrl: '/IMG_0378.jpeg',
     images: ['/IMG_0378.jpeg', '/IMG_0383.jpeg', '/IMG_0390.jpeg', '/IMG_0399.jpeg', '/IMG_0415.jpeg', '/IMG_0427.jpeg']
