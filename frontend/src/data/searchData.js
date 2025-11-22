@@ -27,7 +27,21 @@ export const events = [
     description: 'Join us for an exciting hackathon where students come together to build innovative AI-powered projects. Collaborate, learn, and showcase your skills in a competitive yet supportive environment.',
     date: '2025-11-09',
     imageUrl: '/CursorHackathon5.jpeg',
-    images: ['/CursorHackathon5.jpeg', '/CursorHackathon3.jpeg', '/CursorHackathon4.jpeg']
+    images: [
+      '/CursorHackathon5.jpeg', 
+      '/CursorHackathon3.jpeg', 
+      '/CursorHackathon4.jpeg',
+      '/IMG_0748.jpg',
+      '/IMG_0751.jpg',
+      '/IMG_4315.jpg',
+      '/IMG_4319.jpg',
+      '/IMG_4334.jpg',
+      '/IMG_4359.jpg',
+      '/IMG_4362.jpg',
+      '/IMG_4366.jpg',
+      '/IMG_4380.jpg',
+      '/IMG_4383.jpg'
+    ]
   },
   {
     name: 'Personal Website Workshop',
