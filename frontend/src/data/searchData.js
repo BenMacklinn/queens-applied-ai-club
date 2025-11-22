@@ -44,14 +44,14 @@ export const teamMembers = [
   { name: 'Ray Goldberg', position: 'Presidents', slug: 'our-team' },
   { name: 'Matthew Bowman', position: 'Director of Partnerships', slug: 'our-team' },
   { name: 'Jacob Shull', position: 'Director of Partnerships', slug: 'our-team' },
-  { name: 'Ned', position: 'Senior Advisor', slug: 'our-team' },
+  { name: 'Ned Booth', position: 'Senior Advisor', slug: 'our-team' },
   { name: 'Max Rainville', position: 'General Member Director', slug: 'our-team' },
   { name: 'Thaila Adda', position: 'Director of Marketing', slug: 'our-team' },
   { name: 'Meyer Eskin', position: 'Director of Marketing', slug: 'our-team' },
   { name: 'Tanry Wang', position: 'Director of Logistics', slug: 'our-team' },
   { name: 'Julian Chan', position: 'Director of Logistics', slug: 'our-team' },
   { name: 'Alex', position: 'Director of Strategy', slug: 'our-team' },
-  { name: 'J CHUGSSSS', position: 'Head Of Culture', slug: 'our-team' }
+  { name: 'Jay Persaud', position: 'Head Of Culture', slug: 'our-team' }
 ];
 
 

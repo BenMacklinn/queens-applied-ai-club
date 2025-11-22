@@ -111,7 +111,7 @@ function CategoryPage() {
       level: 'Advisor',
       title: 'Senior Advisor',
       members: [
-        { name: 'Ned', imageUrl: null, linkedin: null }
+        { name: 'Ned Booth', imageUrl: '/NedBooth.jpeg', linkedin: 'https://www.linkedin.com/in/ned-booth/' }
       ]
     },
     {
@@ -125,8 +125,8 @@ function CategoryPage() {
       level: 'Director',
       title: 'Director of Marketing',
       members: [
-        { name: 'Thaila Adda', imageUrl: null, linkedin: null },
-        { name: 'Meyer Eskin', imageUrl: null, linkedin: null }
+        { name: 'Thaila Adda', imageUrl: '/ThailaAdda.jpeg', linkedin: 'https://www.linkedin.com/in/thailaadda/' },
+        { name: 'Meyer Eskin', imageUrl: '/MeyerEskin.jpeg', linkedin: 'https://www.linkedin.com/in/meyereskin/' }
       ],
       coordinators: 'TBD'
     },
@@ -149,7 +149,7 @@ function CategoryPage() {
       level: 'Head',
       title: 'Head Of Culture',
       members: [
-        { name: 'J CHUGSSSS', imageUrl: null, linkedin: null }
+        { name: 'Jay Persaud', imageUrl: '/JayChugs.jpeg', linkedin: 'https://www.linkedin.com/in/jay-persaud/' }
       ]
     }
   ];
