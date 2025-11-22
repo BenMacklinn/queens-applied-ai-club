@@ -15,8 +15,8 @@ function Hero() {
     const cta = ctaRef.current;
 
     // Set initial state
-    gsap.set(titleLines, { opacity: 0, y: 50 });
-    gsap.set(cta, { opacity: 0, y: 20 });
+    gsap.set(titleLines, { opacity: 0, y: 50, filter: 'blur(10px)' });
+    gsap.set(cta, { opacity: 0, y: 20, filter: 'blur(10px)' });
 
     // Create timeline
     const tl = gsap.timeline({ delay: 0.3 });
@@ -26,6 +26,7 @@ function Hero() {
       tl.to(line, {
         opacity: 1,
         y: 0,
+        filter: 'blur(0px)',
         duration: 0.8,
         ease: 'power3.out'
       }, index * 0.15);
@@ -35,6 +36,7 @@ function Hero() {
     tl.to(cta, {
       opacity: 1,
       y: 0,
+      filter: 'blur(0px)',
       duration: 0.6,
       ease: 'power2.out'
     }, '-=0.3');
