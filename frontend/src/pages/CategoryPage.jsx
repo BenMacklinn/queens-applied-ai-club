@@ -277,81 +277,249 @@ function CategoryPage() {
 
   // Special layout for Events page
   if (slug === 'events') {
+    const [selectedEvent, setSelectedEvent] = React.useState(null);
+    const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
+    
+    // Preload images for faster navigation
+    React.useEffect(() => {
+      if (selectedEvent) {
+        const eventImages = selectedEvent.images || [selectedEvent.imageUrl].filter(Boolean);
+        // Preload current, next, and previous images
+        eventImages.forEach((imgSrc, index) => {
+          const img = new Image();
+          img.src = imgSrc;
+        });
+      }
+    }, [selectedEvent]);
+    
+    // Preload adjacent images when index changes
+    React.useEffect(() => {
+      if (selectedEvent) {
+        const eventImages = selectedEvent.images || [selectedEvent.imageUrl].filter(Boolean);
+        // Preload next and previous images
+        const nextIndex = (selectedImageIndex + 1) % eventImages.length;
+        const prevIndex = (selectedImageIndex - 1 + eventImages.length) % eventImages.length;
+        
+        [nextIndex, prevIndex].forEach(index => {
+          if (eventImages[index]) {
+            const img = new Image();
+            img.src = eventImages[index];
+          }
+        });
+      }
+    }, [selectedEvent, selectedImageIndex]);
+    
+    // Sort events by date (newest first)
+    const sortedEvents = [...events].sort((a, b) => {
+      if (!a.date || !b.date) return 0;
+      return new Date(b.date) - new Date(a.date);
+    });
+    
+    // Format date for display
+    const formatDate = (dateString) => {
+      if (!dateString) return '';
+      // Parse date string directly to avoid timezone issues
+      const parts = dateString.split('-');
+      if (parts.length !== 3) return dateString;
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);
+      const day = parseInt(parts[2], 10);
+      const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      return `${months[month - 1]} ${day}, ${year}`;
+    };
+    
+    // Memoized navigation handlers for better performance
+    const handleNextImage = React.useCallback((e, eventImages) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setSelectedImageIndex((prev) => 
+        prev === eventImages.length - 1 ? 0 : prev + 1
+      );
+    }, []);
+    
+    const handlePrevImage = React.useCallback((e, eventImages) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setSelectedImageIndex((prev) => 
+        prev === 0 ? eventImages.length - 1 : prev - 1
+      );
+    }, []);
+    
+    const handleThumbnailClick = React.useCallback((e, index) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setSelectedImageIndex(index);
+    }, []);
+    
     return (
       <>
         <Navbar />
-        <div className="category-page events-page">
+        <div className={`category-page events-page ${selectedEvent ? 'modal-open' : ''}`}>
           <div className="category-page-container">
             <Link to="/" className="back-link cursor-target">← Back to Home</Link>
             <div className="category-header">
               <h1 className="category-title">Events</h1>
             </div>
             
-            <div className="projects-grid events-grid">
-              {events.map((event, index) => {
+            <div className="events-timeline">
+              <div className="timeline-middle-line"></div>
+              {sortedEvents.map((event, index) => {
                 const borderColor = paletteColors[index % paletteColors.length];
+                const eventImages = event.images || [event.imageUrl].filter(Boolean);
+                // Alternate: 0=right, 1=left, 2=right, 3=left, etc.
+                const isRight = index % 2 === 0;
+                const progress = ((index + 1) / sortedEvents.length) * 100;
+                
                 return (
                   <div 
                     key={index}
-                    className="project-card event-card cursor-target"
+                    className={`timeline-event ${isRight ? 'timeline-event-right' : 'timeline-event-left'}`}
                     ref={el => setCardRef(el, index)}
-                    style={{ 
-                      borderColor: borderColor,
-                      '--project-border-color': borderColor
-                    }}
-                    onClick={() => setSelectedProject(event)}
                   >
-                    {event.imageUrl && (
-                      <div className="project-image-container">
-                        <img 
-                          src={event.imageUrl} 
-                          alt={event.name}
-                          className="project-image"
-                        />
+                    <div className="timeline-marker" style={{ '--event-color': borderColor }}>
+                      <div className="timeline-marker-dot"></div>
+                      <div className="timeline-marker-pulse"></div>
+                    </div>
+                    
+                    <div 
+                      className="timeline-event-card cursor-target"
+                      style={{ '--event-color': borderColor }}
+                      onClick={() => {
+                        setSelectedEvent(event);
+                        setSelectedImageIndex(0);
+                      }}
+                    >
+                      <div className="timeline-event-date">
+                        {event.date && formatDate(event.date)}
                       </div>
-                    )}
-                    <div className="project-card-content">
-                      <h3 className="project-name">{event.name}</h3>
-                      <p className="project-view-more">View More</p>
+                      
+                      <div className="timeline-event-image-wrapper">
+                        {eventImages.length > 0 && (
+                          <>
+                            <img 
+                              src={eventImages[0]} 
+                              alt={event.name}
+                              className="timeline-event-image"
+                            />
+                            <div className="timeline-event-image-overlay"></div>
+                          </>
+                        )}
+                      </div>
+                      
+                      <div className="timeline-event-content">
+                        <h3 className="timeline-event-title">{event.name}</h3>
+                        <div className="timeline-event-footer">
+                          <span className="timeline-event-photos">{eventImages.length} Photos</span>
+                          <span className="timeline-event-arrow">→</span>
+                        </div>
+                      </div>
+                      
+                      <div className="timeline-event-progress" style={{ width: '100%' }}></div>
                     </div>
                   </div>
                 );
               })}
             </div>
             
-            {selectedProject && (() => {
-              const eventIndex = events.findIndex(e => e.name === selectedProject.name);
+            {selectedEvent && (() => {
+              const eventIndex = events.findIndex(e => e.name === selectedEvent.name);
               const modalBorderColor = paletteColors[eventIndex % paletteColors.length];
+              const eventImages = selectedEvent.images || [selectedEvent.imageUrl].filter(Boolean);
+              
               return (
-                <div className="project-modal-overlay" onClick={() => setSelectedProject(null)}>
+                <div className="event-gallery-overlay" onClick={() => setSelectedEvent(null)}>
                   <div 
-                    className="project-modal" 
+                    className="event-gallery-modal" 
                     onClick={(e) => e.stopPropagation()}
                     style={{ 
-                      '--project-border-color': modalBorderColor,
-                      borderColor: modalBorderColor
+                      '--event-color': modalBorderColor
                     }}
                   >
                     <button 
-                      className="project-modal-close" 
-                      onClick={() => setSelectedProject(null)}
-                      style={{ borderColor: modalBorderColor }}
+                      className="event-gallery-close cursor-target" 
+                      onClick={() => setSelectedEvent(null)}
                     >×</button>
-                    {selectedProject.imageUrl && (
-                      <div 
-                        className="project-modal-image-container"
-                        style={{ borderBottomColor: modalBorderColor }}
-                      >
-                        <img 
-                          src={selectedProject.imageUrl} 
-                          alt={selectedProject.name}
-                          className="project-modal-image"
-                        />
+                    
+                    <div className="event-gallery-header">
+                      <div className="event-gallery-header-top">
+                        <h2 className="event-gallery-title">{selectedEvent.name}</h2>
+                        {selectedEvent.date && (
+                          <div className="event-gallery-date">{formatDate(selectedEvent.date)}</div>
+                        )}
                       </div>
-                    )}
-                    <div className="project-modal-content">
-                      <h2 className="project-modal-name">{selectedProject.name}</h2>
-                      <p className="project-modal-description">{selectedProject.description}</p>
+                      <p className="event-gallery-description">{selectedEvent.description}</p>
+                    </div>
+                    
+                    <div className="event-gallery-main">
+                      {eventImages.length > 0 && (
+                        <div className="event-gallery-main-image-container">
+                          {/* Hidden preload images for adjacent slides */}
+                          {eventImages.length > 1 && (
+                            <>
+                              <img 
+                                src={eventImages[(selectedImageIndex + 1) % eventImages.length]} 
+                                alt=""
+                                style={{ display: 'none' }}
+                                loading="eager"
+                              />
+                              <img 
+                                src={eventImages[(selectedImageIndex - 1 + eventImages.length) % eventImages.length]} 
+                                alt=""
+                                style={{ display: 'none' }}
+                                loading="eager"
+                              />
+                            </>
+                          )}
+                          <img 
+                            key={selectedImageIndex}
+                            src={eventImages[selectedImageIndex]} 
+                            alt={`${selectedEvent.name} ${selectedImageIndex + 1}`}
+                            className="event-gallery-main-image"
+                            loading="eager"
+                            decoding="async"
+                          />
+                          {eventImages.length > 1 && (
+                            <>
+                              <button 
+                                className="event-gallery-nav event-gallery-prev cursor-target"
+                                onClick={(e) => handlePrevImage(e, eventImages)}
+                                type="button"
+                              >‹</button>
+                              <button 
+                                className="event-gallery-nav event-gallery-next cursor-target"
+                                onClick={(e) => handleNextImage(e, eventImages)}
+                                type="button"
+                              >›</button>
+                            </>
+                          )}
+                        </div>
+                      )}
+                      
+                      {eventImages.length > 1 && (
+                        <div className="event-gallery-thumbnails">
+                          {eventImages.map((img, imgIndex) => (
+                            <div
+                              key={imgIndex}
+                              className={`event-gallery-thumbnail cursor-target ${imgIndex === selectedImageIndex ? 'active' : ''}`}
+                              onClick={(e) => handleThumbnailClick(e, imgIndex)}
+                              role="button"
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  handleThumbnailClick(e, imgIndex);
+                                }
+                              }}
+                            >
+                              <img 
+                                src={img} 
+                                alt={`${selectedEvent.name} thumbnail ${imgIndex + 1}`}
+                                loading="lazy"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -421,7 +589,7 @@ function CategoryPage() {
                     }}
                   >
                     <button 
-                      className="project-modal-close" 
+                      className="project-modal-close cursor-target" 
                       onClick={() => setSelectedProject(null)}
                       style={{ borderColor: modalBorderColor }}
                     >×</button>
@@ -545,70 +713,52 @@ function CategoryPage() {
             <Link to="/" className="back-link cursor-target">← Back to Home</Link>
             
             <div className="about-us-hero">
+              <div className="about-us-abstract-bg">
+                <div className="about-us-abstract-shape about-us-shape-1"></div>
+                <div className="about-us-abstract-shape about-us-shape-2"></div>
+                <div className="about-us-abstract-shape about-us-shape-3"></div>
+                <div className="about-us-abstract-shape about-us-shape-4"></div>
+              </div>
               <h1 className="about-us-title">About Us</h1>
-              <p className="about-us-tagline">
-                Empowering the next generation of AI builders at Queen's University
-              </p>
             </div>
 
             <div className="about-us-main-content">
-              <section className="about-us-section">
-                <h2 className="about-us-section-title">Our Mission</h2>
+              <div className="about-us-description">
+                <div className="about-us-abstract-line about-us-line-1"></div>
+                <div className="about-us-geometric-shape about-us-geo-1"></div>
+                <div className="about-us-geometric-shape about-us-geo-2"></div>
                 <p className="about-us-text">
-                  QVibe empowers anyone to build with AI tools, regardless of technical background. We host hands-on workshops, annual hackathons, and collaborative project building sessions.
+                  QVibe is Queen's University's Applied AI Club. We empower students to build with AI, regardless of technical background.
                 </p>
-              </section>
-
-              <section className="about-us-section">
-                <h2 className="about-us-section-title">What We Do</h2>
-                <div className="about-us-features">
-                  <div className="about-us-feature">
-                    <div className="about-us-feature-icon">🎓</div>
-                    <h3 className="about-us-feature-title">Workshops</h3>
-                    <p className="about-us-feature-text">
-                      Hands-on learning sessions where members explore cutting-edge AI tools and techniques in a supportive environment.
-                    </p>
-                  </div>
-                  <div className="about-us-feature">
-                    <div className="about-us-feature-icon">🚀</div>
-                    <h3 className="about-us-feature-title">Hackathons</h3>
-                    <p className="about-us-feature-text">
-                      Annual events that bring together students to build innovative AI projects, network, and showcase their creativity.
-                    </p>
-                  </div>
-                  <div className="about-us-feature">
-                    <div className="about-us-feature-icon">🤝</div>
-                    <h3 className="about-us-feature-title">Collaboration</h3>
-                    <p className="about-us-feature-text">
-                      Project building sessions where members work together to solve real-world problems using AI technologies.
-                    </p>
+                <div className="about-us-abstract-line about-us-line-2"></div>
+              </div>
+              
+              <div className="about-us-details">
+                <div className="about-us-detail-item">
+                  <div className="about-us-detail-line"></div>
+                  <div className="about-us-detail-content">
+                    <div className="about-us-detail-abstract about-us-detail-abstract-1"></div>
+                    <h3 className="about-us-detail-title">Workshops</h3>
+                    <p className="about-us-detail-text">Hands-on learning with cutting-edge AI tools</p>
                   </div>
                 </div>
-              </section>
-
-              <section className="about-us-section">
-                <h2 className="about-us-section-title">Our Values</h2>
-                <div className="about-us-values">
-                  <div className="about-us-value">
-                    <h3 className="about-us-value-title">Accessibility</h3>
-                    <p className="about-us-value-text">
-                      We believe AI should be accessible to everyone, regardless of prior experience or technical background.
-                    </p>
-                  </div>
-                  <div className="about-us-value">
-                    <h3 className="about-us-value-title">Innovation</h3>
-                    <p className="about-us-value-text">
-                      We foster a culture of experimentation and creative problem-solving with emerging technologies.
-                    </p>
-                  </div>
-                  <div className="about-us-value">
-                    <h3 className="about-us-value-title">Community</h3>
-                    <p className="about-us-value-text">
-                      We build strong connections between students passionate about AI and technology.
-                    </p>
+                <div className="about-us-detail-item">
+                  <div className="about-us-detail-line"></div>
+                  <div className="about-us-detail-content">
+                    <div className="about-us-detail-abstract about-us-detail-abstract-2"></div>
+                    <h3 className="about-us-detail-title">Hackathons</h3>
+                    <p className="about-us-detail-text">Annual events to build, network, and showcase</p>
                   </div>
                 </div>
-              </section>
+                <div className="about-us-detail-item">
+                  <div className="about-us-detail-line"></div>
+                  <div className="about-us-detail-content">
+                    <div className="about-us-detail-abstract about-us-detail-abstract-3"></div>
+                    <h3 className="about-us-detail-title">Projects</h3>
+                    <p className="about-us-detail-text">Collaborative building sessions solving real problems</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -667,4 +817,5 @@ function CategoryPage() {
 }
 
 export default CategoryPage;
+
 

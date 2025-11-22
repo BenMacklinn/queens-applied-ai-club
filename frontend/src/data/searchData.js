@@ -22,17 +22,19 @@ export const projects = [
 ];
 
 export const events = [
-  { 
-    name: 'Cursor Hackathon', 
-    description: 'We hosted an exciting hackathon focused on building with AI tools using Cursor. Participants collaborated, learned, and created innovative projects.',
-    imageUrl: '/Queens.png',
-    slug: 'events'
+  {
+    name: 'Cursor x QVibe Hackathon',
+    description: 'Join us for an exciting hackathon where students come together to build innovative AI-powered projects. Collaborate, learn, and showcase your skills in a competitive yet supportive environment.',
+    date: '2025-11-09',
+    imageUrl: '/CursorHackathon5.jpeg',
+    images: ['/CursorHackathon5.jpeg', '/CursorHackathon3.jpeg', '/CursorHackathon4.jpeg']
   },
-  { 
-    name: 'Personal Website Workshop', 
-    description: 'We taught participants how to build their own personal website from scratch. This workshop was perfect for beginners looking to showcase their work and build their online presence.',
-    imageUrl: '/CursorHackathon3.jpeg',
-    slug: 'events'
+  {
+    name: 'Personal Website Workshop',
+    description: 'Learn hands-on web development techniques and tools. This workshop covers building personal websites from scratch, including design, development, and deployment. Perfect for beginners and experienced developers alike.',
+    date: '2025-11-21',
+    imageUrl: '/IMG_0378.jpeg',
+    images: ['/IMG_0378.jpeg', '/IMG_0383.jpeg', '/IMG_0390.jpeg', '/IMG_0399.jpeg', '/IMG_0415.jpeg', '/IMG_0427.jpeg']
   }
 ];
 

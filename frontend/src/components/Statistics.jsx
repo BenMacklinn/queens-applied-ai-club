@@ -135,8 +135,11 @@ function Statistics() {
 
   return (
     <section className="statistics" ref={sectionRef}>
+      <div className="statistics-gradient-overlay"></div>
       <div className="statistics-container">
         <div className="statistics-left-bg">
+          <div className="statistics-left-rim-light"></div>
+          <div className="statistics-bottom-rim-light"></div>
           <div className="statistics-header">
             <h2 className="statistics-title">
               <span className="statistics-title-line">By The</span>
