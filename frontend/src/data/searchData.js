@@ -57,6 +57,7 @@ export const teamMembers = [
   { name: 'Ben Lewandowski', position: 'Presidents', slug: 'our-team' },
   { name: 'Ray Goldberg', position: 'Presidents', slug: 'our-team' },
   { name: 'Charlotte King', position: 'Chief of Staff', slug: 'our-team' },
+  { name: 'Ella McConell', position: 'Chief of Staff', slug: 'our-team' },
   { name: 'Matthew Bowman', position: 'Director of Partnerships', slug: 'our-team' },
   { name: 'Jacob Shull', position: 'Director of Partnerships', slug: 'our-team' },
   { name: 'Ned Booth', position: 'Senior Advisor', slug: 'our-team' },
