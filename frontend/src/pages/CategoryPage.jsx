@@ -100,6 +100,13 @@ function CategoryPage() {
       ]
     },
     {
+      level: 'Head',
+      title: 'Chief of Staff',
+      members: [
+        { name: 'Charlotte King', imageUrl: '/CharKing.jpeg', linkedin: 'https://www.linkedin.com/in/charlotte-king-0ba139310/' }
+      ]
+    },
+    {
       level: 'Director',
       title: 'Director of Partnerships',
       members: [
