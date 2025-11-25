@@ -201,8 +201,33 @@ function CategoryPage() {
               <div className="get-involved-right">
                 <form className="get-involved-form" onSubmit={(e) => {
                   e.preventDefault();
-                  // Handle form submission here
-                  console.log('Form submitted:', formData);
+                  // Format the purpose text
+                  const purposeText = {
+                    'join-club': 'Join Club',
+                    'workshop': 'Attend Workshop',
+                    'collaborate': 'Collaborate',
+                    'other': 'Other'
+                  }[formData.purpose] || formData.purpose;
+                  
+                  // Create email subject and body
+                  const subject = encodeURIComponent(`Get Involved: ${purposeText}`);
+                  const body = encodeURIComponent(
+                    `Name: ${formData.fullName}\n` +
+                    `Email: ${formData.email}\n` +
+                    `Purpose: ${purposeText}\n\n` +
+                    `Message:\n${formData.message}`
+                  );
+                  
+                  // Open mailto link
+                  window.location.href = `mailto:benvmacklin@gmail.com?subject=${subject}&body=${body}`;
+                  
+                  // Reset form after submission
+                  setFormData({
+                    fullName: '',
+                    email: '',
+                    purpose: '',
+                    message: ''
+                  });
                 }}>
                   <div className="form-field">
                     <label className="form-label">FULL NAME</label>
@@ -720,53 +745,142 @@ function CategoryPage() {
           <div className="category-page-container">
             <Link to="/" className="back-link cursor-target">← Back to Home</Link>
             
+            {/* Hero Section with Image */}
             <div className="about-us-hero">
-              <div className="about-us-abstract-bg">
-                <div className="about-us-abstract-shape about-us-shape-1"></div>
-                <div className="about-us-abstract-shape about-us-shape-2"></div>
-                <div className="about-us-abstract-shape about-us-shape-3"></div>
-                <div className="about-us-abstract-shape about-us-shape-4"></div>
+              <div className="about-us-hero-content">
+                <div className="about-us-hero-image-container">
+                  <img 
+                    src="/QVibeAboutUs.png" 
+                    alt="QVibe - Queen's Applied AI Club" 
+                    className="about-us-hero-image"
+                  />
+                </div>
+                <div className="about-us-hero-text">
+                  <h1 className="about-us-title">About QVibe</h1>
+                  <p className="about-us-subtitle">
+                    Queen's University's Fastest Growing AI Community
+                  </p>
+                </div>
               </div>
-              <h1 className="about-us-title">About Us</h1>
             </div>
 
-            <div className="about-us-main-content">
-              <div className="about-us-description">
-                <div className="about-us-abstract-line about-us-line-1"></div>
-                <div className="about-us-geometric-shape about-us-geo-1"></div>
-                <div className="about-us-geometric-shape about-us-geo-2"></div>
-                <p className="about-us-text">
-                  QVibe is Queen's University's Applied AI Club. We empower students to build with AI, regardless of technical background.
-                </p>
-                <div className="about-us-abstract-line about-us-line-2"></div>
+            {/* Mission Section */}
+            <div className="about-us-section">
+              <div className="about-us-section-header">
+                <h2 className="about-us-section-title">Our Mission</h2>
+                <div className="about-us-section-divider"></div>
               </div>
-              
-              <div className="about-us-details">
-                <div className="about-us-detail-item">
-                  <div className="about-us-detail-line"></div>
-                  <div className="about-us-detail-content">
-                    <div className="about-us-detail-abstract about-us-detail-abstract-1"></div>
-                    <h3 className="about-us-detail-title">Workshops</h3>
-                    <p className="about-us-detail-text">Hands-on learning with cutting-edge AI tools</p>
+              <p className="about-us-mission-text">
+                QVibe is Queen's University's Applied AI Club. We empower students to build with AI, 
+                regardless of technical background. Our mission is to democratize AI education and 
+                provide hands-on opportunities for students to explore, learn, and create with cutting-edge 
+                artificial intelligence technologies.
+              </p>
+            </div>
+
+            {/* What We Do Section */}
+            <div className="about-us-section">
+              <div className="about-us-section-header">
+                <h2 className="about-us-section-title">What We Do</h2>
+                <div className="about-us-section-divider"></div>
+              </div>
+              <div className="about-us-features-grid">
+                <div className="about-us-feature-card">
+                  <div className="about-us-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
                   </div>
+                  <h3 className="about-us-feature-title">Workshops</h3>
+                  <p className="about-us-feature-description">
+                    Hands-on learning sessions with cutting-edge AI tools. From beginner-friendly 
+                    introductions to advanced techniques, our workshops cater to all skill levels.
+                  </p>
                 </div>
-                <div className="about-us-detail-item">
-                  <div className="about-us-detail-line"></div>
-                  <div className="about-us-detail-content">
-                    <div className="about-us-detail-abstract about-us-detail-abstract-2"></div>
-                    <h3 className="about-us-detail-title">Hackathons</h3>
-                    <p className="about-us-detail-text">Annual events to build, network, and showcase</p>
+                <div className="about-us-feature-card">
+                  <div className="about-us-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
                   </div>
+                  <h3 className="about-us-feature-title">Hackathons</h3>
+                  <p className="about-us-feature-description">
+                    Annual events where students come together to build, network, and showcase their 
+                    innovative AI projects. A platform for creativity and collaboration.
+                  </p>
                 </div>
-                <div className="about-us-detail-item">
-                  <div className="about-us-detail-line"></div>
-                  <div className="about-us-detail-content">
-                    <div className="about-us-detail-abstract about-us-detail-abstract-3"></div>
-                    <h3 className="about-us-detail-title">Projects</h3>
-                    <p className="about-us-detail-text">Collaborative building sessions solving real problems</p>
+                <div className="about-us-feature-card">
+                  <div className="about-us-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                      <path d="M8 21v-1a2 2 0 012-2h4a2 2 0 012 2v1"/>
+                    </svg>
                   </div>
+                  <h3 className="about-us-feature-title">Speakers</h3>
+                  <p className="about-us-feature-description">
+                    Learn from industry experts and thought leaders in AI. Our speaker series brings 
+                    insights from professionals working at the forefront of artificial intelligence.
+                  </p>
+                </div>
+                <div className="about-us-feature-card">
+                  <div className="about-us-feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                  </div>
+                  <h3 className="about-us-feature-title">AI Tool Demos</h3>
+                  <p className="about-us-feature-description">
+                    Hands-on demonstrations of cutting-edge AI development tools including Cursor, 
+                    Lovable, and Gemini. Learn how to leverage these powerful platforms to build 
+                    innovative applications.
+                  </p>
                 </div>
               </div>
+            </div>
+
+            {/* Values Section */}
+            <div className="about-us-section">
+              <div className="about-us-section-header">
+                <h2 className="about-us-section-title">Our Values</h2>
+                <div className="about-us-section-divider"></div>
+              </div>
+              <div className="about-us-values">
+                <div className="about-us-value-item">
+                  <h4 className="about-us-value-title">Accessibility</h4>
+                  <p className="about-us-value-text">
+                    We believe AI should be accessible to everyone, regardless of technical background or experience level.
+                  </p>
+                </div>
+                <div className="about-us-value-item">
+                  <h4 className="about-us-value-title">Innovation</h4>
+                  <p className="about-us-value-text">
+                    We encourage creative thinking and innovative solutions to real-world problems using AI technologies.
+                  </p>
+                </div>
+                <div className="about-us-value-item">
+                  <h4 className="about-us-value-title">Collaboration</h4>
+                  <p className="about-us-value-text">
+                    We foster a collaborative environment where students learn from each other and build together.
+                  </p>
+                </div>
+                <div className="about-us-value-item">
+                  <h4 className="about-us-value-title">Growth</h4>
+                  <p className="about-us-value-text">
+                    We are committed to continuous learning and helping our members grow both personally and professionally.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="about-us-cta">
+              <h3 className="about-us-cta-title">Ready to Get Involved?</h3>
+              <p className="about-us-cta-text">
+                Join Queen's University's fastest growing AI community and start building with AI today.
+              </p>
+              <Link to="/category/get-involved" className="about-us-cta-button cursor-target">
+                Get Involved
+              </Link>
             </div>
           </div>
         </div>
