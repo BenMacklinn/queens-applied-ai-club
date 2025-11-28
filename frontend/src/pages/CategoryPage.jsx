@@ -100,47 +100,50 @@ function CategoryPage() {
       ]
     },
     {
+      level: 'Advisor',
+      title: 'Advisors',
+      members: [
+        { name: 'Ned Booth', imageUrl: '/NedBooth.jpeg', linkedin: 'https://www.linkedin.com/in/ned-booth/' },
+        { name: 'Meyer Eskin', imageUrl: '/MeyerEskin.jpeg', linkedin: 'https://www.linkedin.com/in/meyereskin/' }
+      ]
+    },
+    {
       level: 'Head',
       title: 'Chief of Staff',
       members: [
         { name: 'Charlotte King', imageUrl: '/CharKing.jpeg', linkedin: 'https://www.linkedin.com/in/charlotte-king-0ba139310/' },
-        { name: 'Ella McConell', imageUrl: '/EllaMcConell.jpeg', linkedin: 'https://www.linkedin.com/in/ellamcconnell/' }
+        { name: 'Ella McConnell', imageUrl: '/EllaMcConell.jpeg', linkedin: 'https://www.linkedin.com/in/ellamcconnell/' }
       ]
     },
     {
       level: 'Director',
-      title: 'Director of Partnerships',
-      members: [
-        { name: 'Matthew Bowman', imageUrl: '/Matthew Bowman.jpeg', linkedin: 'https://www.linkedin.com/in/matthew-bowman-4a0874388/' },
-        { name: 'Jacob Shull', imageUrl: '/Jacob Shull.png', linkedin: 'https://www.linkedin.com/in/jacob-shull-95b019221/' }
-      ]
-    },
-    {
-      level: 'Advisor',
-      title: 'Senior Advisor',
-      members: [
-        { name: 'Ned Booth', imageUrl: '/NedBooth.jpeg', linkedin: 'https://www.linkedin.com/in/ned-booth/' }
-      ]
-    },
-    {
-      level: 'Director',
-      title: 'General Member Director',
-      members: [
-        { name: 'Max Rainville', imageUrl: '/Max Rainville.png', linkedin: 'https://www.linkedin.com/in/max-rainville-5814642a8/' }
-      ]
-    },
-    {
-      level: 'Director',
-      title: 'Director of Marketing',
+      title: 'Marketing',
       members: [
         { name: 'Thaila Adda', imageUrl: '/ThailaAdda.jpeg', linkedin: 'https://www.linkedin.com/in/thailaadda/' },
-        { name: 'Meyer Eskin', imageUrl: '/MeyerEskin.jpeg', linkedin: 'https://www.linkedin.com/in/meyereskin/' }
-      ],
-      coordinators: 'TBD'
+        { name: 'Sasha Mais', imageUrl: null }
+      ]
     },
     {
       level: 'Director',
-      title: 'Director of Logistics',
+      title: 'Partnerships',
+      members: [
+        { name: 'Matthew Bowman', imageUrl: '/Matthew Bowman.jpeg', linkedin: 'https://www.linkedin.com/in/matthew-bowman-4a0874388/' },
+        { name: 'Jacob Shull', imageUrl: '/Jacob Shull.png', linkedin: 'https://www.linkedin.com/in/jacob-shull-95b019221/' },
+        { name: 'Kayla Hakimzadeh', imageUrl: null }
+      ]
+    },
+    {
+      level: 'Director',
+      title: 'Events',
+      members: [
+        { name: 'Alex Wittstock', imageUrl: '/AlexWittstock.jpeg', linkedin: 'https://www.linkedin.com/in/alex-wittstock-69363929a/' },
+        { name: 'Greg Brenner', imageUrl: '/Greg Brenner.png' },
+        { name: 'Daniel Ifergan', imageUrl: '/Daniel Ifergan.png' }
+      ]
+    },
+    {
+      level: 'Director',
+      title: 'Logistics',
       members: [
         { name: 'Tanry Wang', imageUrl: '/Tanry Wang.png', linkedin: 'https://www.linkedin.com/in/tanry-wang-9b7222278/' },
         { name: 'Julian Chan', imageUrl: '/Julian Chan.png', linkedin: 'https://www.linkedin.com/in/julian-chan-91347b2b9/' }
@@ -148,9 +151,37 @@ function CategoryPage() {
     },
     {
       level: 'Director',
-      title: 'Director of Strategy',
+      title: 'Outreach',
       members: [
-        { name: 'Alex Wittstock', imageUrl: '/AlexWittstock.jpeg', linkedin: 'https://www.linkedin.com/in/alex-wittstock-69363929a/' }
+        { name: 'Jesse Olujic', imageUrl: null },
+        { name: 'Chiara Kim', imageUrl: null },
+        { name: 'Camren Fawbert', imageUrl: null }
+      ]
+    },
+    {
+      level: 'Director',
+      title: 'EDII',
+      members: [
+        { name: 'Warren Marcotte', imageUrl: null }
+      ]
+    },
+    {
+      level: 'Director',
+      title: 'Finance',
+      members: [
+        { name: 'Will Sheppard', imageUrl: null },
+        { name: 'Max Rainville', imageUrl: '/Max Rainville.png', linkedin: 'https://www.linkedin.com/in/max-rainville-5814642a8/' }
+      ]
+    },
+    {
+      level: 'Head',
+      title: 'Culture',
+      members: [
+        { name: 'Patrick Buckley', imageUrl: null },
+        { name: 'Jay Persaud', imageUrl: '/JayChugs.jpeg', linkedin: 'https://www.linkedin.com/in/jay-persaud/' },
+        { name: 'Brodie Gilles', imageUrl: '/Brodie Gilles.png' },
+        { name: 'Lauren Leslie', imageUrl: null },
+        { name: 'Gracie Wright', imageUrl: null }
       ]
     },
     {
@@ -158,13 +189,6 @@ function CategoryPage() {
       title: 'Linting Director',
       members: [
         { name: 'Jack Dorland', imageUrl: '/Dorland.jpeg', linkedin: 'https://www.linkedin.com/in/jack-dorland-238b41302/' }
-      ]
-    },
-    {
-      level: 'Head',
-      title: 'Head Of Culture',
-      members: [
-        { name: 'Jay Persaud', imageUrl: '/JayChugs.jpeg', linkedin: 'https://www.linkedin.com/in/jay-persaud/' }
       ]
     }
   ];
