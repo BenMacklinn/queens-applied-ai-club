@@ -154,6 +154,13 @@ function CategoryPage() {
       ]
     },
     {
+      level: 'Director',
+      title: 'Linting Director',
+      members: [
+        { name: 'Jack Dorland', imageUrl: '/Dorland.jpeg', linkedin: 'https://www.linkedin.com/in/jack-dorland-238b41302/' }
+      ]
+    },
+    {
       level: 'Head',
       title: 'Head Of Culture',
       members: [
