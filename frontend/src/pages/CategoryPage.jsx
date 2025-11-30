@@ -154,7 +154,7 @@ function CategoryPage() {
       level: 'Director',
       title: 'Outreach',
       members: [
-        { name: 'Jesse Olujic', imageUrl: null },
+        { name: 'Jessie Olujic', imageUrl: '/JessieOlujic.jpeg', linkedin: 'https://www.linkedin.com/in/jessieolujic/' },
         { name: 'Chiara Kim', imageUrl: null },
         { name: 'Camren Fawbert', imageUrl: null }
       ]

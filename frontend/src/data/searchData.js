@@ -70,7 +70,7 @@ export const teamMembers = [
   { name: 'Daniel Ifergan', position: 'Events', slug: 'our-team' },
   { name: 'Tanry Wang', position: 'Logistics', slug: 'our-team' },
   { name: 'Julian Chan', position: 'Logistics', slug: 'our-team' },
-  { name: 'Jesse Olujic', position: 'Outreach', slug: 'our-team' },
+  { name: 'Jessie Olujic', position: 'Outreach', slug: 'our-team' },
   { name: 'Chiara Kim', position: 'Outreach', slug: 'our-team' },
   { name: 'Camren Fawbert', position: 'Outreach', slug: 'our-team' },
   { name: 'Warren Marcotte', position: 'EDII', slug: 'our-team' },
