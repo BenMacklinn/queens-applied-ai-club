@@ -139,7 +139,7 @@ function CategoryPage() {
       members: [
         { name: 'Alex Wittstock', imageUrl: '/AlexWittstock.jpeg', linkedin: 'https://www.linkedin.com/in/alex-wittstock-69363929a/' },
         { name: 'Greg Brenner', imageUrl: '/Greg Brenner.png' },
-        { name: 'Daniel Ifergan', imageUrl: '/Daniel Ifergan.png' }
+        { name: 'Daniel Ifergan', imageUrl: '/Difergan.jpg' }
       ]
     },
     {
