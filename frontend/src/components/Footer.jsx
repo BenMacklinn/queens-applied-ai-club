@@ -1,8 +1,27 @@
 import './Footer.css';
-import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { categories } from '../data/categories';
 
 function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleCategoryClick = (slug) => {
+    const targetPath = `/category/${slug}`;
+    // Force navigation even if already on the same route
+    if (location.pathname === targetPath) {
+      // Navigate away first, then back to force re-render
+      navigate('/');
+      setTimeout(() => {
+        navigate(targetPath);
+        window.scrollTo(0, 0);
+      }, 0);
+    } else {
+      navigate(targetPath);
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -15,9 +34,16 @@ function Footer() {
             <span className="footer-categories-group">
               {categories.map((category, index) => (
                 <span key={category.id}>
-                  <Link to={`/category/${category.slug}`} className="footer-link footer-link-category cursor-target">
+                  <a 
+                    href={`/category/${category.slug}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryClick(category.slug);
+                    }}
+                    className="footer-link footer-link-category cursor-target"
+                  >
                     {category.name}
-                  </Link>
+                  </a>
                   {index < categories.length - 1 && <span className="footer-separator">•</span>}
                 </span>
               ))}
@@ -28,6 +54,9 @@ function Footer() {
         <div className="footer-bottom">
           <p className="footer-copyright">
             © 2025 Queen's Applied AI Club | QVibe. All rights reserved.
+          </p>
+          <p className="footer-contact">
+            Questions? Reach out to Founder <strong>Ben Macklin</strong> - <a href="mailto:ben.macklin@queensu.ca" className="footer-email">ben.macklin@queensu.ca</a>
           </p>
         </div>
       </div>

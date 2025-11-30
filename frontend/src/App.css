@@ -2,7 +2,9 @@
   width: 100%;
   min-height: 100vh;
   background: #0a0a0a;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
+  position: relative;
 }
 
 * {

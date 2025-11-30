@@ -133,8 +133,9 @@ function Navbar() {
     }
   };
 
-  const handleCategoryClick = () => {
+  const handleCategoryClick = (e) => {
     setIsMenuOpen(false);
+    setIsSearchOpen(false);
     // Hide target cursor when clicking sidebar menu items
     const cursorElement = document.querySelector('.target-cursor-wrapper');
     if (cursorElement) {
@@ -146,6 +147,7 @@ function Navbar() {
         });
       }
     }
+    // Don't prevent default - let React Router handle navigation
   };
 
   const handleSearchOverlayClick = () => {
@@ -343,7 +345,10 @@ function Navbar() {
                             key={`project-${index}`}
                             to={`/category/${project.slug}`}
                             className="navbar-search-result-item cursor-target"
-                            onClick={handleCategoryClick}
+                            onClick={(e) => {
+                              handleCategoryClick(e);
+                              setIsSearchOpen(false);
+                            }}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{project.name}</span>
@@ -365,7 +370,10 @@ function Navbar() {
                             key={`event-${index}`}
                             to={`/category/${event.slug}`}
                             className="navbar-search-result-item cursor-target"
-                            onClick={handleCategoryClick}
+                            onClick={(e) => {
+                              handleCategoryClick(e);
+                              setIsSearchOpen(false);
+                            }}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{event.name}</span>
@@ -387,7 +395,10 @@ function Navbar() {
                             key={`member-${index}`}
                             to={`/category/${member.slug}`}
                             className="navbar-search-result-item cursor-target"
-                            onClick={handleCategoryClick}
+                            onClick={(e) => {
+                              handleCategoryClick(e);
+                              setIsSearchOpen(false);
+                            }}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{member.name}</span>
@@ -409,7 +420,10 @@ function Navbar() {
                             key={category.id}
                             to={`/category/${category.slug}`}
                             className="navbar-search-result-item cursor-target"
-                            onClick={handleCategoryClick}
+                            onClick={(e) => {
+                              handleCategoryClick(e);
+                              setIsSearchOpen(false);
+                            }}
                           >
                             <div className="navbar-search-result-content">
                               <span className="navbar-search-result-name">{category.name}</span>

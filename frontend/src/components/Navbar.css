@@ -246,15 +246,27 @@
 
 @media (max-width: 640px) {
   .navbar-container {
-    padding: 12px 20px;
+    padding: 12px 16px;
   }
 
   .navbar-logo-img {
-    height: 48px;
+    height: 44px;
+  }
+
+  .navbar-left {
+    gap: 16px;
   }
 
   .navbar-right {
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .navbar-icon,
+  .navbar-menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+    -webkit-tap-highlight-color: rgba(99, 180, 235, 0.2);
   }
 
   .navbar-menu {
@@ -262,25 +274,65 @@
   }
 
   .navbar-menu-header {
-    padding: 60px 24px 20px 24px;
+    padding: 80px 20px 20px 20px;
   }
 
   .navbar-menu-title {
-    font-size: 28px;
-    letter-spacing: 6px;
+    font-size: 24px;
+    letter-spacing: 4px;
   }
 
   .navbar-menu-item {
-    padding: 16px 24px;
+    padding: 18px 20px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    -webkit-tap-highlight-color: rgba(99, 180, 235, 0.2);
   }
 
   .navbar-menu-item-name {
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 2px;
   }
 
   .navbar-menu-item-subtitle {
     font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 10px 12px;
+  }
+
+  .navbar-logo-img {
+    height: 40px;
+  }
+
+  .navbar-icon,
+  .navbar-menu-toggle {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
+  }
+
+  .navbar-menu-header {
+    padding: 70px 16px 16px 16px;
+  }
+
+  .navbar-menu-title {
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+
+  .navbar-menu-item {
+    padding: 16px;
+    min-height: 56px;
+  }
+
+  .navbar-menu-item-name {
+    font-size: 14px;
     letter-spacing: 1.5px;
   }
 }

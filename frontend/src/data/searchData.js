@@ -80,8 +80,7 @@ export const teamMembers = [
   { name: 'Jay Persaud', position: 'Culture', slug: 'our-team' },
   { name: 'Brodie Gilles', position: 'Culture', slug: 'our-team' },
   { name: 'Lauren Leslie', position: 'Culture', slug: 'our-team' },
-  { name: 'Gracie Wright', position: 'Culture', slug: 'our-team' },
-  { name: 'Jack Dorland', position: 'Linting Director', slug: 'our-team' }
+  { name: 'Gracie Wright', position: 'Culture', slug: 'our-team' }
 ];
 
 

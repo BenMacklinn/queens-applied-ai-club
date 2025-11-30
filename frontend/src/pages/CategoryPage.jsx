@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { categories, subcategories } from '../data/categories';
 import { projects as sharedProjects, events as sharedEvents } from '../data/searchData';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import './CategoryPage.css';
 
 function CategoryPage() {
@@ -96,7 +97,7 @@ function CategoryPage() {
       members: [
         { name: 'Ben Macklin', imageUrl: '/Ben Macklin.png', linkedin: 'https://www.linkedin.com/in/ben-macklin-927576297/' },
         { name: 'Ben Lewandowski', imageUrl: '/Ben Lewandowski.png', linkedin: 'https://www.linkedin.com/in/ben-lewandowski-/' },
-        { name: 'Ray Goldberg', imageUrl: '/Ray Goldberg.png', linkedin: 'https://www.linkedin.com/in/ray-goldberg-2791a9338/' }
+        { name: 'Ray Goldberg', imageUrl: null, linkedin: 'https://www.linkedin.com/in/ray-goldberg-2791a9338/' }
       ]
     },
     {
@@ -183,13 +184,6 @@ function CategoryPage() {
         { name: 'Lauren Leslie', imageUrl: null },
         { name: 'Gracie Wright', imageUrl: null }
       ]
-    },
-    {
-      level: 'Director',
-      title: 'Linting Director',
-      members: [
-        { name: 'Jack Dorland', imageUrl: '/Dorland.jpeg', linkedin: 'https://www.linkedin.com/in/jack-dorland-238b41302/' }
-      ]
     }
   ];
 
@@ -250,7 +244,7 @@ function CategoryPage() {
                   );
                   
                   // Open mailto link
-                  window.location.href = `mailto:benvmacklin@gmail.com?subject=${subject}&body=${body}`;
+                  window.location.href = `mailto:ben.macklin@queensu.ca?subject=${subject}&body=${body}`;
                   
                   // Reset form after submission
                   setFormData({
@@ -335,6 +329,7 @@ function CategoryPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }
@@ -591,6 +586,7 @@ function CategoryPage() {
             })()}
           </div>
         </div>
+        <Footer />
       </>
     );
   }
@@ -627,6 +623,18 @@ function CategoryPage() {
                           src={project.imageUrl} 
                           alt={project.name}
                           className="project-image"
+                          onError={(e) => {
+                            // Fallback to placeholder if image fails to load
+                            e.target.style.display = 'none';
+                            const container = e.target.parentElement;
+                            if (container && !container.querySelector('.project-image-placeholder')) {
+                              const placeholder = document.createElement('div');
+                              placeholder.className = 'project-image-placeholder';
+                              placeholder.innerHTML = '📱';
+                              placeholder.style.cssText = 'display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 48px; background: #1a1a1a;';
+                              container.appendChild(placeholder);
+                            }
+                          }}
                         />
                       </div>
                     )}
@@ -666,6 +674,18 @@ function CategoryPage() {
                           src={selectedProject.imageUrl} 
                           alt={selectedProject.name}
                           className="project-modal-image"
+                          onError={(e) => {
+                            // Fallback to placeholder if image fails to load
+                            e.target.style.display = 'none';
+                            const container = e.target.parentElement;
+                            if (container && !container.querySelector('.project-modal-image-placeholder')) {
+                              const placeholder = document.createElement('div');
+                              placeholder.className = 'project-modal-image-placeholder';
+                              placeholder.innerHTML = '📱';
+                              placeholder.style.cssText = 'display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 64px; background: #1a1a1a; color: rgba(255, 255, 255, 0.3);';
+                              container.appendChild(placeholder);
+                            }
+                          }}
                         />
                       </div>
                     )}
@@ -679,6 +699,7 @@ function CategoryPage() {
             })()}
           </div>
         </div>
+        <Footer />
       </>
     );
   }
@@ -763,6 +784,7 @@ function CategoryPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }
@@ -915,6 +937,7 @@ function CategoryPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -965,6 +988,7 @@ function CategoryPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

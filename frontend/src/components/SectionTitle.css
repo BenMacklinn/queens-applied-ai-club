@@ -3,7 +3,9 @@
   background: #0a0a0a;
   position: relative;
   z-index: 10;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
 }
 
 .section-title-container {
@@ -60,6 +62,10 @@
     0 0 60px rgba(99, 180, 235, 0.4),
     0 0 100px rgba(196, 139, 212, 0.3),
     inset 0 0 80px rgba(255, 255, 255, 0.1);
+}
+
+.section-title-container {
+  overflow-x: hidden;
 }
 
 .section-title-word-categories::before {
@@ -138,6 +144,11 @@
 }
 
 @media (max-width: 968px) {
+  .section-title-container {
+    padding: 0 30px;
+    overflow-x: hidden;
+  }
+
   .section-title-word {
     font-size: 80px;
     letter-spacing: 16px;
@@ -152,15 +163,26 @@
 @media (max-width: 640px) {
   .section-title {
     padding: 60px 0;
+    overflow-x: hidden;
   }
 
   .section-title-container {
     padding: 0 20px;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .section-title-content {
+    width: 100%;
+    overflow-x: hidden;
   }
 
   .section-title-word {
     font-size: 48px;
     letter-spacing: 12px;
+    white-space: normal;
+    word-break: break-word;
   }
 
   .section-title-word-categories {

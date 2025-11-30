@@ -3,7 +3,9 @@
   background: #0a0a0a;
   position: relative;
   z-index: 10;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
 }
 
 .category-section-container {
@@ -13,12 +15,13 @@
   overflow-x: hidden;
   overflow-y: visible;
   position: relative;
+  width: 100%;
 }
 
 .category-section-scroll {
   display: flex;
   gap: 12px;
-  overflow-x: visible;
+  overflow-x: hidden;
   overflow-y: hidden;
   padding: 20px 0;
   scroll-behavior: smooth;
@@ -27,6 +30,7 @@
   align-items: stretch;
   flex-wrap: nowrap;
   width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -40,6 +44,41 @@
 @media (max-width: 1200px) {
   .category-section-scroll {
     gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-section {
+    overflow-x: hidden;
+  }
+
+  .category-section-container {
+    padding: 0 20px;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .category-section-scroll {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: visible;
+    gap: 20px;
+    padding: 20px 0;
+    width: 100%;
+  }
+  
+  .category-card-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .category-card {
+    width: 100%;
+    min-width: auto;
+    max-width: 100%;
   }
 }
 
@@ -53,31 +92,32 @@
   }
 
   .category-section-scroll {
-    gap: 8px;
-    overflow-x: auto;
+    gap: 16px;
+    padding: 20px 0;
+  }
+  
+  .category-card-wrapper {
+    max-width: 100%;
   }
   
   .category-card {
-    width: 160px;
-    min-width: 160px;
+    width: 100%;
+    min-width: auto;
   }
-  
-  .category-section-scroll::-webkit-scrollbar {
-    height: 4px;
+}
+
+@media (max-width: 480px) {
+  .category-section {
+    padding: 50px 0;
   }
 
-  .category-section-scroll::-webkit-scrollbar-track {
-    background: #252525;
-    border-radius: 4px;
+  .category-section-container {
+    padding: 0 16px;
   }
 
-  .category-section-scroll::-webkit-scrollbar-thumb {
-    background: #63B4EB;
-    border-radius: 4px;
-  }
-
-  .category-section-scroll::-webkit-scrollbar-thumb:hover {
-    background: #76A7E4;
+  .category-section-scroll {
+    gap: 14px;
+    padding: 16px 0;
   }
 }
 
