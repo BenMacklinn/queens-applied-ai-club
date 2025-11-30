@@ -181,7 +181,7 @@ function CategoryPage() {
         { name: 'Patrick Buckley', imageUrl: null },
         { name: 'Jay Persaud', imageUrl: '/JayChugs.jpeg', linkedin: 'https://www.linkedin.com/in/jay-persaud/' },
         { name: 'Brodie Gilles', imageUrl: '/Brodie Gilles.png' },
-        { name: 'Lauren Leslie', imageUrl: null },
+        { name: 'Lauren Leslie', imageUrl: '/LaurenLeslie.JPG', linkedin: 'https://www.linkedin.com/in/lauren-leslie11/' },
         { name: 'Gracie Wright', imageUrl: null }
       ]
     }
