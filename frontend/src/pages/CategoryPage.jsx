@@ -773,6 +773,9 @@ function CategoryPage() {
                             )}
                             <div className="team-card-content">
                               <h3 className="team-member-name">{member.name}</h3>
+                              {(member.name === 'Ben Macklin' || member.name === 'Ben Lewandowski' || member.name === 'Ray Goldberg') && (
+                                <p className="team-member-position">(Founder)</p>
+                              )}
                             </div>
                           </CardComponent>
                         );
